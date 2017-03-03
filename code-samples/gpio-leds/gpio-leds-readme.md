@@ -18,12 +18,16 @@ A script and a C program demonstrate how to programmatically control the LEDS on
 The README files in each of the example folders contain detailed instructions, sample scripts and functions for interacting with the board.
 
 ### SSH 
+
 If you are using SSH, it is handy to have two terminals open to the same example directory.
+
 1. Display the README file in one terminal (e.g. cat readme_gpio-keys.txt)
 1. Copy the example scripts from this terminal and paste into the second terminal as you progress through the tutorial.
 
 ### VNC
+
 If you are using a VNC client:
+
 1. Open the README file with gedit.
 1. Open a terminal window and navigate to the example directory.
 1. Copy scripts from gedit and paste into the terminal window.
