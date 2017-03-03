@@ -5,19 +5,19 @@ There are two example programs for the FFT application:
 * Example Program 1: Uses the ARM\* CPU & NEON\* co-processor to perform the FFT calculation
 * Example Program 2: Uses the FFT hardware in the FPGA.
 
-There are many more variants of these examples, using different data sizes, and data sources (FFT RAM vs. CPU cache) in the src directory. There are also scripts for generating waveform plots of from the results data if you wish to experiment further.
+There are many variants of these examples, using different data sizes, and data sources (FFT RAM vs. CPU cache) in the src directory. There are also scripts for generating waveform sample data, and plotting the FFT results if you wish to experiment further.
 
+The program listed below below performs the FFT operation using the ARM CPU and NEON co-processor using data stored on the SD Card.
+ 
 ```  
 neon32_256.c
 ``` 
  
-This program performs the FFT operation using the ARM CPU and NEON co-processor using data stored on the SD Card.
- 
+The program listed below performs the FFT operation using the hardware accelerator and DMAs inside the FPGA using data stored on the SD Card. The input and output data pass through the Acceleration Coherency Port (ACP) of the processor's L2 cache.
+
 ``` 
 ffftdma_256.c
 ``` 
- 
-This program performs the FFT operation using the hardware accelerator and DMAs inside the FPGA using data stored on the SD Card. The input and output data pass through the Acceleration Coherency Port (ACP) of the processor's L2 cache.
  
 *Please see the README files in the sandbox directory for more information.*
  
