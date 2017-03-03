@@ -41,7 +41,6 @@ build_watch_switch_events.sh
 build_toggle_fpga_leds.sh
 build_poll_KEY0_pb_state.sh
 build_show_KEY0_pb_state.sh
- 
 ```
 ## Sandbox Directory
 The sandbox directory contains source files, scripts, and instructions you can review, run, modify, and recompile the example designs. It also contains a tar ball copy of the entire sandbox contents so they can be restored if needed.
