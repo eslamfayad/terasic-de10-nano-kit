@@ -26,12 +26,12 @@ This program performs the FFT operation using the hardware accelerator and DMAs 
  
 The README_SANDBOX.txt file contains detailed instructions, scripts and functions for interacting with the board.
 
-##SSH 
+###SSH 
 If you are using SSH, it is handy to have two terminals open to the same example directory:
 1. Display the README file in one terminal (e.g. cat readme_sandbox.txt)
 1. Copy the example scripts from this terminal and paste into the second terminal as you progress through the tutorial.
 
-##VNC 
+###VNC 
 If you are using a VNC client:
 1. Open the README file with gedit.
 1. Open a terminal window and navigate to the example directory.
@@ -42,7 +42,7 @@ If you are using a VNC client:
 
 Scripts are provided to build the applications, generate sample data, and prepare results to be displayed using tools like GNU Plot.
  
-## Building the applications
+### Building the applications
 ```
 sandbox_build_all.sh
 target_build_app.sh
@@ -51,7 +51,7 @@ target_build_ne10.sh
 clean_all.sh
 
 ``` 
-## Generate Sample Data
+### Generate Sample Data
 ```
 sandbox_create_input_waveforms.sh
 create_real_short_sine32.c
@@ -61,13 +61,13 @@ duplicate_x8.sh
 real_short_to_ne10cpx_long.c
 real_short_to_ne10cpx_short.c
 ```
-## Prepare Results For Display
+### Prepare Results For Display
 ```
 ne10cpx_long_to_text.c
 ```
  
  
-#Sandbox Directory
+# Sandbox Directory
 
 The sandbox directory contains source files, scripts and documentation you can review, run, modify, and recompile as you wish. It also contains a tar ball which is a copy of the entire sandbox contents so they can be restored if needed.
  
