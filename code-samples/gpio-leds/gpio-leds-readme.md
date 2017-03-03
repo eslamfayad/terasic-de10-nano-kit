@@ -1,5 +1,5 @@
 # Example Programs
-There are three example directories that contain examples and instructions for interacting with the GPIO resources on the DE10-Nano board using the gpio framework provided by the Linux environment.
+There are three directories that contain examples and instructions for interacting with the GPIO resources on the DE10-Nano board using the gpio framework provided by the Linux environment.
  
 ## raw-gpio
  
