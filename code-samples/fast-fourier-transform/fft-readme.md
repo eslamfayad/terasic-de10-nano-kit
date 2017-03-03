@@ -2,8 +2,8 @@
 
 There are two example programs for the FFT application:
 
-*Example Program 1: Uses the ARM CPU & NEON co-processor to perform the FFT calculation
-*Example Program 2: uses the FFT hardware in the FPGA.
+* Example Program 1: Uses the ARM CPU & NEON co-processor to perform the FFT calculation
+* Example Program 2: uses the FFT hardware in the FPGA.
 
 There are many more variants of these examples, using different data sizes, and data sources (FFT RAM vs. CPU cache) in the src directory. There are also scripts for generating waveform plots of from the results data if you wish to experiment further.
 
