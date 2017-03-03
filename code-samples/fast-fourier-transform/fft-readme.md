@@ -22,17 +22,19 @@ ffftdma_256.c
 *Please see the README files in the sandbox directory for more information.*
  
  
-#Tutorials
+# Tutorials
  
 The README_SANDBOX.txt file contains detailed instructions, scripts and functions for interacting with the board.
 
-###SSH 
-If you are using SSH, it is handy to have two terminals open to the same example directory:
+### SSH
+
+If you are using SSH to access the board, it is handy to have two terminals open to the same example directory:
 1. Display the README file in one terminal (e.g. cat readme_sandbox.txt)
 1. Copy the example scripts from this terminal and paste into the second terminal as you progress through the tutorial.
 
-###VNC 
-If you are using a VNC client:
+### VNC client, Synergy soft KVM, or direct connection to keybord, monitor & mouse
+
+If you are accessing the board in any of the ways described above:
 1. Open the README file with gedit.
 1. Open a terminal window and navigate to the example directory.
 1. Copy scripts from gedit and paste into the terminal window.
