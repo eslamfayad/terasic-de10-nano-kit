@@ -61,14 +61,66 @@ Prerequisites for Node.js bindings only:
 opkg install git nodejs nodejs-npm nodejs-dev
 ```
 
-Prerequisites for a full MRAA & UPM install (C/C++, Node.js and Python):
+Prerequisites for a full MRAA & UPM install (C/C++, Java, Node.js, Python2&3):
 ```
 opkg install cmake cmake-modules swig python-dev python3-dev
 ```
 
-## Installing Express, WebSockets and Plotly
+For Java bindings, install openjdk-8 from the Angstrom repository. This can be done with opkg, the ipk is
+[here](http://feeds.angstrom-distribution.org/feeds/v2015.12/ipk/glibc/armv7at2hf-vfp-neon/base/openjdk-8_72b05-r0.0_armv7at2hf-vfp-neon.ipk).
+You can also add the feed to opkg and do a remote install (not shown).
+
+To enable Java during a MRAA or UPM build you will have to pass the following flag to cmake `BUILDSWIGJAVA=ON`.
+
+Additional build flags for the [MRAA](https://github.com/intel-iot-devkit/mraa/blob/master/docs/building.md)
+library are described here and for [UPM](https://github.com/intel-iot-devkit/upm/blob/master/docs/building.md) here.
+
+With all the prerequisites met, the MRAA and UPM libraries build and install rather easily on the DE10-Nano.
+On a newer image they might be already installed or available through opkg.
+
+## Installing Express, Websocket and Plotly
+
+When using the sample code from this repository, Express, Websocket and Plotly will get installed during the initial
+`npm install` in the application folder.
+
+If you decided to skip past the installing section above, you can opt for an NPM install of MRAA and UPM.
+Simply change your `package.json` file to add the MRAA and UPM dependencies:
+
+```json
+  "dependencies": {
+    "body-parser": "~1.16.0",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.0",
+    "express": "~4.14.1",
+    "jade": "~1.11.0",
+    "morgan": "~1.7.0",
+    "plotly": "^1.0.6",
+    "serve-favicon": "~2.3.2",
+    "websocket": "^1.0.24",
+    "mraa": "^1.5.1",
+    "jsupm_adxl345": "^1.0.2-src"
+  }
+```
 
 ## Setting up the server
+
+Starting Express is as simple as typing the following command:
+```
+npm start
+```
+
+However, if you didn't install the library as explained a while ago, you'll need to make an additional
+change to the server file.
+
+In the file `app.js` change the following line:
+```js
+var upm = require('/usr/lib/node_modules/jsupm_adxl345');
+```
+To:
+```js
+var mraa = require('mraa');
+var upm = require('jsupm_adxl345");
+```
 
 ## Getting accelerometer data and plotting
 
