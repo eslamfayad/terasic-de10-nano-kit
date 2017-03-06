@@ -33,9 +33,9 @@ If you are using SSH to access the board, it is handy to have two terminals open
 1. Display the README file in one terminal (e.g. cat readme_sandbox.txt)
 1. Copy the example scripts from this terminal and paste into the second terminal as you progress through the tutorial.
 
-### VNC client, Synergy soft KVM, or direct connection to keybord, monitor & mouse
+### Linux Desktop
 
-If you are accessing the board in any of the ways described above:
+If you are accessing the board's Linux desktop, we recommend the following:
 
 1. Open the README file with gedit.
 1. Open a terminal window and navigate to the example directory.
