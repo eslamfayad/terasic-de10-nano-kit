@@ -42,7 +42,11 @@ build_toggle_fpga_leds.sh
 build_poll_KEY0_pb_state.sh
 build_show_KEY0_pb_state.sh
 ```
-## Sandbox Directory
+
+# Examples Directory
+
+The GPIO examples directory is located on the SD Card that shipped with the DE10-Nano kit. If your SD Card has been damaged, erased, or misplaced, you can get the latest image from the SD Card downloads site <need link for SDCard git>. This folder contains source code, archives, binaries, and an area called the sandbox in which you can experiment. 
+
 The sandbox directory contains source files, scripts, and instructions you can review, run, modify, and recompile the example designs. It also contains a tar ball copy of the entire sandbox contents so they can be restored if needed.
  
 /examples/gpio
