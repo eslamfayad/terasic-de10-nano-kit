@@ -71,7 +71,9 @@ ne10cpx_long_to_text.c
 ```
  
  
-# Sandbox Directory
+# Examples Directory
+
+The FFT examples directory is located on the SD Card that shipped with the DE10-Nano kit. If your SD Card has been damaged, erased, or misplaced, you can get the latest image from the SD Card downloads site <need link for SDCard git>. This folder contains source code, archives, binaries, and an area called the sandbox in which you can experiment. 
 
 The sandbox directory contains source files, scripts and documentation you can review, run, modify, and recompile as you wish. It also contains a tar ball which is a copy of the entire sandbox contents so they can be restored if needed.
  
