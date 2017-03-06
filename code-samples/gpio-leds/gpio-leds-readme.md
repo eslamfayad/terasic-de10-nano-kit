@@ -13,7 +13,7 @@ A script and two C programs demonstrate how to programmatically detect the input
  
 A script and a C program demonstrate how to programmatically control the LEDS on the DE10-Nano board.
  
-## Tutorials
+# Tutorials
  
 The README files in each of the example folders contain detailed instructions, sample scripts and functions for interacting with the board. 
 
@@ -32,7 +32,7 @@ If you are accessing the board's Linux desktop, we recommend the following:
 1. Open a terminal window and navigate to the example directory.
 1. Copy scripts from gedit and paste into the terminal window.
  
-## Build Scripts
+# Build Scripts
 Scripts are provided to build the example applications.
 
 ``` 
