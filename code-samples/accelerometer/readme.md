@@ -1,26 +1,50 @@
 # MRAA and UPM with the DE10-Nano Kit
 
-## Introduction
+## FPGA and Accelerometer
 
-Talk about how awesome FPGA's are, DE10-Nano specs and capabilities, pictures, etc. Align with Bob Garret on this.
-Continue with a very brief description of MRAA and UPM and provide further links.
+Field programmable gate arrays (FPGAs), are programmable chips that provide developers with a few key advantages: customization, flexibility, plus power & performance. The (mention specs or features related to accelerometer here) provides developers with... The onboard accelerometer... Can we relate the accelerometer to any IoT applications?
 
-Article description:
-By following the steps listed in this article users will be able to build and install the MRAA and UPM on their board.
-Node.js is the language of choice for this exercise. The UPM library is used to read data from the built-in Analog Devices ADXL345 3-axis accelerometer. 
-The readers will then setup a very simple Express.js webserver that uses WebSockets to push live data captured from the accelerometer to the client's browser.
-We picked the Plotly graphing library is used to visualize the data in the form of a real-time plot. The page will be accessible from almost any browser/device combo.
+Description of MRAA and UPM and provide further links.
 
-## Connecting the board to the network
+####Libraries
 
-Before we can move any further, we need to connect the board to the internet. In most cases this is as simple as plugging in an Ethernet
-cable to the Ethernet port. By default, the Ethernet interface on the board is set to Dynamic Host Configuration Protocol (DHCP) mode,
-thus it will automatically ask for an IP address from the router that the board was plugged into.
+*MRAA
+MRAA is an I/O library... 
 
-The process of connecting to the DE10-Nano and hosting the webpages is made a lot easier by configuring said router to assign a static IP to
-the board based on the MAC address of the Ethernet interface. Most modern routers are able to do this even with DHCP assignment turned on.
+*UPM
+UPM is a sensor library... UPM supports various accelerometers including the de10-nano's built in accelerometer.The UPM library is used to read data from the built-in Analog Devices ADXL345 3-axis accelerometer.
 
-Alternatively, one can force a static IP on the eth0 interface with connman:
+####Programming Language
+Node.js
+
+
+In this accelerometer tutorial you'll learn to:
+
+1. Prepare the DE10-Nano development board to host the accelerometer application
+
+1. Build and install the MRAA and UPM libraries on the de10-nano board.
+
+1. Setup a basic Express.js webserver
+This webserveruses WebSockets to push live data captured from the accelerometer to the client's browser.
+
+1. Generate a real-time plot using Plotly*
+The Plotly* graphing library is used to visualize the data in the form of a real-time plot. The page is accessible from almost any browser/device combo.
+
+note package manager (NPM)
+
+## Prepare your DE10-Nano
+### Connect the board to the internet
+
+First connect the DE10-Nano board to the internet and get a static IP. 
+
+1. Run an Ethernet cable from the DE10-Nano board to a router. 
+
+#### Get a static IP
+By default, the Ethernet interface on the board is set to Dynamic Host Configuration Protocol (DHCP) mode, thus it will automatically ask for an IP address from the router that the board was plugged into.
+
+The process of connecting to the DE10-Nano and hosting the webpages is made a lot easier by configuring the router to assign a static IP to the board (based on the MAC address of the Ethernet interface). Most modern routers are able to do this even with DHCP assignment turned on. You won't have to edit the server configuration everytime you are assigned a new IP address by the router. 
+
+Run the following command to force a static IP on the eth0 interface with connman:
 `connmanctl config ethernet_000000000000_cable --ipv4 manual 192.168.1.10 255.255.255.0 192.168.1.1`
 
 (explain further)
@@ -28,16 +52,19 @@ Alternatively, one can force a static IP on the eth0 interface with connman:
 To go back to DHCP mode use:
 `connmanctl config ethernet_000000000000_cable --ipv4 dhcp`
 
-Newer versions of the DE10-Nano image will contain drivers for most USB WiFi dongles. Unfortunately this exercise does not cover
-setting up a wireless connection.
+Note: newer versions of the DE10-Nano image will contain drivers for most USB WiFi dongles. Unfortunately this exercise does not cover setting up a wireless connection.
 
-## Extending the uSD card root partition
+### Extend the micro SD card root partition
 
-In order to build install the MRAA and UPM libraries natively on the DE10-Nano board, we need to use an 8 GB or larger uSD card. The uSD card included
-with the kit doesn't provide enough free space for compiling the libraries.
+To build and install the MRAA and UPM libraries natively on the DE10-Nano board, an 8 GB or larger uSD card is required. The uSD card included with the kit doesn't provide enough disk space for compiling the libraries.
 
 Once the image has been deployed on a larger uSD card, we need to extend the rootfs partition in order to claim the extra free space.
 
+* give the user another option -- include note about using the default microsd card and not having to deploy the image on a larger microsd card image) *
+
+* two major paths -- Tudor to elaborate *
+
+#### opkg
 * Describe opkg and how to use it to install software on the DE10-Nano *
 
 For this we need the e2fsprogs-resize2fs tool, which can resize a mounted partition live. On newer images this tool might be installed by default.
@@ -49,12 +76,7 @@ opkg install e2fsprogs-resize2fs
 
 Describe how to use fdisk and resize2fs to modify the partition table and extend rootfs step by step.
 
-## Building and installing MRAA & UPM
-
-If you didn't use opkg in the previous section to install resize2fs (reword based on new section above):
-```
-opkg update
-```
+## Build and install the MRAA & UPM libraries
 
 Prerequisites for Node.js bindings only:
 ```
@@ -129,5 +151,3 @@ var upm = require('jsupm_adxl345");
 ## Conclusion
 
 ## References
-
-
