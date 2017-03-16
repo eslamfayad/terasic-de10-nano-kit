@@ -6,17 +6,16 @@ Field programmable gate arrays (FPGAs), are programmable chips that provide deve
 
 Description of MRAA and UPM and provide further links.
 
-####Libraries
+#### Libraries
 
-*MRAA
+* MRAA
 MRAA is an I/O library... 
 
-*UPM
+* UPM
 UPM is a sensor library... UPM supports various accelerometers including the de10-nano's built in accelerometer.The UPM library is used to read data from the built-in Analog Devices ADXL345 3-axis accelerometer.
 
-####Programming Language
-Node.js
-
+#### Programming Language
+Node.js\*
 
 In this accelerometer tutorial you'll learn to:
 
@@ -27,8 +26,8 @@ In this accelerometer tutorial you'll learn to:
 1. Setup a basic Express.js webserver
 This webserveruses WebSockets to push live data captured from the accelerometer to the client's browser.
 
-1. Generate a real-time plot using Plotly*
-The Plotly* graphing library is used to visualize the data in the form of a real-time plot. The page is accessible from almost any browser/device combo.
+1. Generate a real-time plot using Plotly\*
+The Plotly\* graphing library is used to visualize the data in the form of a real-time plot. The page is accessible from almost any browser/device combo.
 
 note package manager (NPM)
 
@@ -83,15 +82,14 @@ Prerequisites for Node.js bindings only:
 opkg install git nodejs nodejs-npm nodejs-dev
 ```
 
-Prerequisites for a full MRAA & UPM install (C/C++, Java, Node.js, Python2&3):
+Prerequisites for a full MRAA & UPM install (C/C++, Java\*, Node.js\*, Python\*2, Python\*3):
 ```
 opkg install cmake cmake-modules swig python-dev python3-dev
 ```
 
-For Java bindings, install openjdk-8 from the Angstrom repository. This can be done with opkg, the ipk is
+For Java bindings, install openjdk-8 from the Angstrom\* repository. This can be done with opkg, the ipk is
 [here](http://feeds.angstrom-distribution.org/feeds/v2015.12/ipk/glibc/armv7at2hf-vfp-neon/base/openjdk-8_72b05-r0.0_armv7at2hf-vfp-neon.ipk).
 You can also add the feed to opkg and do a remote install (not shown).
-
 To enable Java during a MRAA or UPM build you will have to pass the following flag to cmake `BUILDSWIGJAVA=ON`.
 
 Additional build flags for the [MRAA](https://github.com/intel-iot-devkit/mraa/blob/master/docs/building.md)
@@ -100,7 +98,7 @@ library are described here and for [UPM](https://github.com/intel-iot-devkit/upm
 With all the prerequisites met, the MRAA and UPM libraries build and install rather easily on the DE10-Nano.
 On a newer image they might be already installed or available through opkg.
 
-## Installing Express, Websocket and Plotly
+## Installing Express\*, Websocket\* and Plotly\*
 
 When using the sample code from this repository, Express, Websocket and Plotly will get installed during the initial
 `npm install` in the application folder.
@@ -126,7 +124,7 @@ Simply change your `package.json` file to add the MRAA and UPM dependencies:
 
 ## Setting up the server
 
-Starting Express is as simple as typing the following command:
+Starting Express\* is as simple as typing the following command:
 ```
 npm start
 ```
