@@ -1,6 +1,7 @@
 # MRAA and UPM with the DE10-Nano Kit
 
 ## FPGA and Accelerometer
+[//]: # (This syntax works like a comment, and won't appear in any output.)
 
 Field programmable gate arrays (FPGAs), are programmable chips that provide developers with a few key advantages: customization, flexibility, plus power & performance. The (mention specs or features related to accelerometer here) provides developers with... The onboard accelerometer... Can we relate the accelerometer to any IoT applications?
 
