@@ -1,11 +1,31 @@
-# MRAA and UPM with the DE10-Nano Kit
+# DE10-Nano on-board Accelerometer
 
 ## FPGA and Accelerometer
 [//]: # (This syntax works like a comment, and won't appear in any output.)
+## Purpose and Overview
+In this tutorial you'll learn to interface with the board's built-in accelerometer (a digital sensor) using an I2C\* interface, determine acceleration and then translate that information to +/- g-force values […] to demonstrate the motion of the DE10-Nano board.
 
-Field programmable gate arrays (FPGAs), are programmable chips that provide developers with a few key advantages: customization, flexibility, plus power & performance. The (mention specs or features related to accelerometer here) provides developers with... The onboard accelerometer... Can we relate the accelerometer to any IoT applications?
+To follow along with this tutorial, the only hardware you'll need is the DE10-Nano board. By tapping or gently shaking the board… The output (raw data) is sent to graphing software for data visualization and interpretation. The sensor has 3 axes of measurement and we measure ALL 3 axes to demonstrate the motion of the board. 
 
-Description of MRAA and UPM and provide further links.
+[//]: # (For getting a tilt/orientation vector you would need to do a bit of trigonometry on the accelerometer data and that is not shown.)
+
+## Next Steps
+[//]: # (Move to the end of document.)
+In showing you how to interact with the on-board accelerometer, you've learned how to:
+* Use opkg to (get stuff from the Web to expand your development environment?)
+* Use Intel’s I/O and sensor libraries (mraa and upm) to get data from the accelerometer. 
+* Integrate (make sense of and interpret) the accelerometer data using different open-source technologies: Express\* (web server) and Plotly\* (graphing library). 
+
+Now that you have been given the tools to make sense of the data output from the accelerometer (visualize the data with graphing software), we hope to enable you to develop more advanced applications where...
+
+**Note**: Both Express.js and Plotly.js are non-restrictive MIT licensed technologies. 
+
+
+## FPGAs and Accelerometer
+[//]: # (This syntax works like a comment, and won't appear in any output.)
+Field programmable gate arrays (FPGAs), are programmable chips that provide developers with a few key advantages: customization, flexibility, plus power & performance.
+
+[//]: # (Description of MRAA and UPM and provide further links.)
 
 #### Libraries
 
@@ -18,14 +38,17 @@ UPM is a sensor library... UPM supports various accelerometers including the de1
 #### Programming Language
 Node.js\*
 
+[//]: # (Tudor, where are we viewing the Plotly graph? Are we connected to the board via HMDI?)
+
 In this accelerometer tutorial you'll learn to:
 
 1. Prepare the DE10-Nano development board to host the accelerometer application
 
 1. Build and install the MRAA and UPM libraries on the de10-nano board.
+[//]: # (Dalon added mraa and upm to the SD card... although neither include Java. May not need to opkg the mraa & upm libaries? How does affect the tutorial steps? No need to build and install mraa and upm libraries? What can we say about these libraries on the SD Card?)
 
 1. Setup a basic Express.js webserver
-This webserveruses WebSockets to push live data captured from the accelerometer to the client's browser.
+This webserver uses WebSockets\* to push live data captured from the accelerometer to the client's browser.
 
 1. Generate a real-time plot using Plotly\*
 The Plotly\* graphing library is used to visualize the data in the form of a real-time plot. The page is accessible from almost any browser/device combo.
@@ -33,9 +56,14 @@ The Plotly\* graphing library is used to visualize the data in the form of a rea
 note package manager (NPM)
 
 ## Prepare your DE10-Nano
+[//]: # (Plug into the hmdi port? What other ports on the board are used here?)
+[//]: # (connect a keyboard and mouse?)
+[//]: # (block diagram or picture of how everything is connected to the board?)
+
 ### Connect the board to the internet
 
 First connect the DE10-Nano board to the internet and get a static IP. 
+[//]: # (Reason we need to connect to the internet is to do opkg??)
 
 1. Run an Ethernet cable from the DE10-Nano board to a router. 
 
@@ -60,12 +88,17 @@ To build and install the MRAA and UPM libraries natively on the DE10-Nano board,
 
 Once the image has been deployed on a larger uSD card, we need to extend the rootfs partition in order to claim the extra free space.
 
-* give the user another option -- include note about using the default microsd card and not having to deploy the image on a larger microsd card image) *
+[//]: # (comment.)
 
-* two major paths -- Tudor to elaborate *
+[//]: # (Give the user another option -- include note about using the default microsd card and not having to deploy the image on a larger microsd card image.)
+
+[//]: # (Two major paths -- Tudor to elaborate.)
 
 #### opkg
-* Describe opkg and how to use it to install software on the DE10-Nano *
+[//]: # (Describe opkg and how to use it to install software on the DE10-Nano.)
+[//]: # (Using opkg, you will install... packages include? mraa & upm libraries, Plotly, amd what else? When you do opkg, you need connection to internet. )
+
+[//]: # (Opkg is use to get packages -- definition? -- off the Web to do what? The result of using opkg? development tools and driver expansion.)
 
 For this we need the e2fsprogs-resize2fs tool, which can resize a mounted partition live. On newer images this tool might be installed by default.
 If it's not available, it can be installed via opkg:
