@@ -1,32 +1,30 @@
 # DE10-Nano on-board Accelerometer
 
-## FPGA and Accelerometer
+## Accelerometer
+### Speeding Up, Slowing Down, Changing Direction
+
+### Communicate with the Accelerometer
+
 [//]: # (This syntax works like a comment, and won't appear in any output.)
+[//]: # (opkg is a package manager -- a package is a pre-compiled application such as Plotly.)
+
 ## Purpose and Overview
+The output of the accelerometer (raw data) is sent to graphing software for data visualization and interpretation. The sensor has 3 axes of measurement and we measure ALL 3 axes to show when the board is in motion.
+
 In this tutorial you'll learn to:
 * Interface with the board's built-in accelerometer (a digital sensor) using an I2C\* interface.
 * Use Intel’s I/O and sensor libraries (MRAA and UPM) to get data from the accelerometer.
 * Use opkg to (get stuff from the Web to expand your development environment?)
-[//]: # (opkg is a package manager -- a package is a pre-compiled application such as Plotly.)
 * Determine (record, collect?) acceleration (data) by tapping or gently shaking the board. Keeping track of the g-forces on the board.
 * Translate the acceleration data into +/- g-force values to demonstrate the motion of the DE10-Nano board.
 * Integrate (make sense of and interpret) the accelerometer data using different open-source technologies: Express\* (web server) and Plotly\* (graphing library).
 
 **Note**: Both Express.js and Plotly.js are non-restrictive MIT licensed technologies.
 
-To follow along with this tutorial, the only hardware you'll need is the DE10-Nano board.  The output of the accelerometer (raw data) is sent to graphing software
-for data visualization and interpretation. The sensor has 3 axes of measurement and we measure ALL 3 axes to show when the board is in motion.
-
 [//]: # (For getting a tilt/orientation vector you would need to do a bit of trigonometry on the accelerometer data and that is not shown.)
 
-## Next Steps
-[//]: # (Move to the end of document.)
-
-Now that you've learned to... and have been given the tools to make sense of the data output from the accelerometer (visualize the data with graphing software)...
-
-## FPGAs and Accelerometer
 [//]: # (This syntax works like a comment, and won't appear in any output.)
-Field programmable gate arrays (FPGAs), are programmable chips that provide developers with a few key advantages: customization, flexibility, plus power & performance.
+
 
 [//]: # (Description of MRAA and UPM and provide further links.)
 
