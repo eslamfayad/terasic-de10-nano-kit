@@ -87,6 +87,7 @@ Node Package Manager (NPM)
 
 First connect the DE10-Nano board to the internet and get a static IP.
 [//]: # (Reason we need to connect to the internet is to do opkg??)
+[//]: # Most importantly to do a git clone on the source code for this tutorial.
 
 1. Run an Ethernet cable from the DE10-Nano board to a router.
 
@@ -97,6 +98,7 @@ The process of connecting to the DE10-Nano and hosting the graphing webpage is m
 Most modern routers are able to do this even with DHCP assignment turned on. By setting a static IP you won't have to edit the client configuration every time you are assigned a new IP address by the router.
 
 Run the following command to force a static IP on the eth0 interface with connman:
+
 `connmanctl config ethernet_000000000000_cable --ipv4 manual <device_ip> <subnet_mask> <gateway_ip>`
 
 Where:
@@ -108,6 +110,25 @@ To go back to DHCP mode use:
 `connmanctl config ethernet_000000000000_cable --ipv4 dhcp`
 
 Note: newer versions of the DE10-Nano image will contain drivers for most USB WiFi dongles. Unfortunately this exercise does not cover setting up a wireless connection.
+
+#### Remote SSH connection
+
+The guide assumes that so far you have been using a Serial connection to the board to perform the initial setup. Once you have the IP of the board, it's easier to switch to SSH.
+To connect to the board use a SSH client like Putty or TeraTerm you will have to setup a password for the root account. This can be changed by running the `passwd` command.
+
+It is possible to connect without using a password too, although not really recommended, by changing the following line in `/etc/shadow`:
+
+```
+root::17247:0:99999:7:::
+```
+
+to
+
+```
+root:U6aMy0wojraho:17247:0:99999:7:::
+```
+
+This changes the root account password from null to an empty password and will allow SSH connections without any other hassle (like public keys).
 
 #### opkg
 [//]: # (Describe opkg and how to use it to install software on the DE10-Nano.)
@@ -141,17 +162,70 @@ If the image has been deployed on a larger uSD card, the rootfs partition can be
 software on the board, collect big data, or build libraries and tools from source. Please keep in mind that the following instructions use `fdisk`, a powerful, low-level partitioning tool that may render the
 image unusable if done incorrectly. In case something goes wrong, you will lose all the data on the uSD card will and have to rewrite the OS image.
 
-For this we need the *e2fsprogs-resize2fs* tool, which can do a live resize a mounted partition live. On newer images this tool might be installed by default.
-If it's not available on the default image, it can be installed via opkg:
+For this we need the *e2fsprogs-resize2fs* tool, which can do a live resize a mounted partition live. It can be installed via opkg:
 
 ```
 opkg install e2fsprogs-resize2fs
 ````
 
-Then, run fdisk in interactive mode, and follow the steps shown.
+Then, run fdisk in interactive mode, and follow the steps shown. In short, we will list the existing partitions and take note of the start cylinder for the primary Linux partition (rootfs).
+After this, delete the partition and create it again, using the exact same starting cylinder (this is very important). For the end cylinder use the maximum value provided by your uSD card.
+This is generally the default value too. List the partitions again to check the changes and then write them. The warning received at the end is normal, since the file system is mounted and
+in use.
 
-```
-fdisk /dev/sda
+```sh
+root@de10-nano:~# fdisk /dev/mmcblk0
+
+The number of cylinders for this disk is set to 236352.
+There is nothing wrong with that, but this is larger than 1024,
+and could in certain setups cause problems with:
+1) software that runs at boot time (e.g., old versions of LILO)
+2) booting and partitioning software from other OSs
+   (e.g., DOS FDISK, OS/2 FDISK)
+
+Command (m for help): p
+
+Disk /dev/mmcblk0: 15.4 GB, 15489564672 bytes
+4 heads, 32 sectors/track, 236352 cylinders
+Units = cylinders of 128 * 512 = 65536 bytes
+
+        Device Boot      Start         End      Blocks  Id System
+/dev/mmcblk0p1   *          49        1648      102400   c Win95 FAT32 (LBA)
+/dev/mmcblk0p2            1649       33648     2048000  83 Linux
+/dev/mmcblk0p3              17          48        2048  a2 Unknown
+
+Partition table entries are not in disk order
+
+Command (m for help): d
+Partition number (1-4): 2
+
+Command (m for help): n
+Command action
+   e   extended
+   p   primary partition (1-4)
+p
+Partition number (1-4): 2
+First cylinder (1-236352, default 1): 1649
+Last cylinder or +size or +sizeM or +sizeK (1649-236352, default 236352): Using default value 236352
+
+Command (m for help): p
+
+Disk /dev/mmcblk0: 15.4 GB, 15489564672 bytes
+4 heads, 32 sectors/track, 236352 cylinders
+Units = cylinders of 128 * 512 = 65536 bytes
+
+        Device Boot      Start         End      Blocks  Id System
+/dev/mmcblk0p1   *          49        1648      102400   c Win95 FAT32 (LBA)
+/dev/mmcblk0p2            1649      236352    15021056  83 Linux
+/dev/mmcblk0p3              17          48        2048  a2 Unknown
+
+Partition table entries are not in disk order
+
+Command (m for help): w
+The partition table has been altered.
+Calling ioctl() to re-read partition table
+fdisk: WARNING: rereading partition table failed, kernel still uses old table: Device or resource busy
+
 ```
 
 * Insert screenshot of fdisk commands *
@@ -159,7 +233,7 @@ fdisk /dev/sda
 Finally, run resize2fs to extend the partition that was modified:
 
 ```
-resize2fs /dev/sda2
+resize2fs /dev/mmcblk0p2
 ```
 
 [//]: # (comment.)
@@ -287,7 +361,8 @@ connection.onmessage = function (message) {
             y: [[adxlData.x], [adxlData.y], [adxlData.z]]
         }
 
-        Plotly.extendTraces('myDiv', newData, [0, 1, 2], 30); // Extend the current graph, last integer here is the number of X values to keep before discarding old data
+        // Extend the current graph, last integer here is the number of X values to keep before discarding old data
+        Plotly.extendTraces('myDiv', newData, [0, 1, 2], 30);
         messagesReceived++;
     } catch (e) {
         console.log('This doesn\'t look like valid JSON: ', message.data);
@@ -315,14 +390,13 @@ This exercise shows how easy it is to integrate the MRAA and UPM libraries withi
 including several rated for industrial use are also available. For a full list of supported sensors please visit the UPM API pages [here](http://iotdk.intel.com/docs/master/upm/modules.html).
 
 ## References
-
-MRAA: http://mraa.io
-UPM: http://upm.mraa.io
-OPKG: https://wiki.openwrt.org/doc/techref/opkg
-Express.js: https://expressjs.com/
-Websocket.js: https://github.com/theturtle32/WebSocket-Node
-Plotly.js: https://plot.ly/javascript/
+ * MRAA: http://mraa.io
+ * UPM: http://upm.mraa.io
+ * OPKG: https://wiki.openwrt.org/doc/techref/opkg
+ * Express.js: https://expressjs.com/
+ * Websocket.js: https://github.com/theturtle32/WebSocket-Node
+ * Plotly.js: https://plot.ly/javascript/
 
 Some nice Plotly examples on how to extend graphs with new data:
-http://codepen.io/plotly/pen/LGEyyY
-http://codepen.io/etpinard/pen/qZzyXp
+ * http://codepen.io/plotly/pen/LGEyyY
+ * http://codepen.io/etpinard/pen/qZzyXp
