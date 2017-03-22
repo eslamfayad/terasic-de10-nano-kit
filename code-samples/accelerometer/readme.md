@@ -52,7 +52,11 @@ Node.js\*
 [//]: # (Tudor, where are we viewing the Plotly graph? Are we connected to the board via HMDI?)
 
 ## Accelerometer Theory
+
 ### Speeding Up, Slowing Down, Changing Direction
+Accelerometers, these devices are the reason your smart phone or tablet knows up from down. They're sensors that measure acceleration (that includes speeding up, slowing down or changing direction) and by detecting changes in orientation (speed and direction along the x, y, and z axes) an accelerometer enables your smart phone to reorient itself when you rotate it by say 90 degrees (lay it on its side to watch a YouTube\* video). 
+
+There are two ways to use an accelerometer: acceleration and tilt. To understand tilt, think about the incline of that shelf you installed yourself. Here we use a 3-axis accelerometer and measure acceleration along all 3 axes (x, y, and z).
 
 ### Communicating with the Accelerometer
 
