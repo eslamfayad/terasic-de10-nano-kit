@@ -1,9 +1,6 @@
 # DE10-Nano on-board Accelerometer
 
-## Accelerometer
-### Speeding Up, Slowing Down, Changing Direction
 
-### Communicate with the Accelerometer
 
 [//]: # (This syntax works like a comment, and won't appear in any output.)
 [//]: # (opkg is a package manager -- a package is a pre-compiled application such as Plotly.)
@@ -21,6 +18,16 @@ In this tutorial you'll learn to:
 
 **Note**: Both Express.js and Plotly.js are non-restrictive MIT licensed technologies.
 
+## Materials
+
+### Hardware
+* DE10-Nano Development Board
+[//]: # (add URL)
+
+
+
+### Software
+
 [//]: # (For getting a tilt/orientation vector you would need to do a bit of trigonometry on the accelerometer data and that is not shown.)
 
 [//]: # (This syntax works like a comment, and won't appear in any output.)
@@ -35,17 +42,22 @@ In this tutorial you'll learn to:
 MRAA is an I/O library (abstraction layer) that creates a common interface across plaforms to access various I/O. Here MRAA is used to access the I2C interface connected to the accelerometer.
 
 * UPM
-UPM is a sensor library that supports various sensors including the de10-nano's built-in accelerometer. The UPM library is used to read data from the built-in  3-axis accelerometer, the Analog
-Devices ADXL345.
+UPM is a sensor library that supports various sensors including the de10-nano's built-in accelerometer. The UPM library is used to read data from the built-in 3-axis accelerometer, the ADXL345 from Analog Devices.
 
-MRAA and UPM come pre-installed on the default DE10-Nano SD card image.
+**Note**: MRAA and UPM come pre-installed on the default DE10-Nano SD card image.
 
 #### Programming Language
 Node.js\*
 
 [//]: # (Tudor, where are we viewing the Plotly graph? Are we connected to the board via HMDI?)
 
-Steps:
+## Accelerometer Theory
+### Speeding Up, Slowing Down, Changing Direction
+
+### Communicating with the Accelerometer
+
+Follow along with the steps below to get data from the DE10-Nano's built-in accelerometer and plot that data in graphing software.
+## Steps:
 
 1. Prepare the DE10-Nano development board to host the accelerometer application
 
