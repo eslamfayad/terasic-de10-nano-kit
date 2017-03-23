@@ -1,34 +1,33 @@
 # DE10-Nano on-board Accelerometer
 
-
-
 [//]: # (This syntax works like a comment, and won't appear in any output.)
 [//]: # (opkg is a package manager -- a package is a pre-compiled application such as Plotly.)
 
 ## Purpose and Overview
-The output of the accelerometer (raw data) is sent to graphing software for data visualization and interpretation. The sensor has 3 axes of measurement and we measure ALL 3 axes to show when the board is in motion.
+Data from the DE10-Nano's built-in 3-axis accelerometer is measured on ALL 3 axes to show when the board is in motion. The raw output of the accelerometer is converted to g-force values by a sensor library and then sent to graphing software for data visualization and interpretation. 
 
-In this tutorial you'll learn to:
-* Interface with the board's built-in accelerometer (a digital sensor) using an I2C\* interface.
+In this tutorial you will:
+* Interface with the board's built-in digital accelerometer using an I2C\* interface.
 * Use Intel’s I/O and sensor libraries (MRAA and UPM) to get data from the accelerometer.
-* Use opkg to (get stuff from the Web to expand your development environment?)
-* Determine (record, collect?) acceleration (data) by tapping or gently shaking the board. Keeping track of the g-forces on the board.
+* Learn how to use opkg to install additional software libraries and tools.
+* Monitor acceleration data by tapping or gently shaking the board 
 * Translate the acceleration data into +/- g-force values to demonstrate the motion of the DE10-Nano board.
-* Integrate (make sense of and interpret) the accelerometer data using different open-source technologies: Express\* (web server) and Plotly\* (graphing library).
+* Show the accelerometer data using different open-source technologies: Express\* (web server), Plotly\* (graphing library), and Websockets\*(data stream).
+
+[//]: # (Keeping track of the g-forces on the board.)
 
 **Note**: Both Express.js and Plotly.js are non-restrictive MIT licensed technologies.
 
 ## Materials
 
 ### Hardware
-* DE10-Nano Development Board
-[//]: # (add URL)
-
-
+* [Terasic DE10-Nano Development Board](https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&CategoryNo=205&No=1046&PartNo=8)
+* Ethernet cable
+* Router
 
 ### Software
 
-[//]: # (For getting a tilt/orientation vector you would need to do a bit of trigonometry on the accelerometer data and that is not shown.)
+[//]: # (For getting a tilt/orientation vector you would need to do a bit of trigonometry on the accelerometer data and that is not shown here.)
 
 [//]: # (This syntax works like a comment, and won't appear in any output.)
 
@@ -44,12 +43,12 @@ MRAA is an I/O library (abstraction layer) that creates a common interface acros
 * UPM
 UPM is a sensor library that supports various sensors including the de10-nano's built-in accelerometer. The UPM library is used to read data from the built-in 3-axis accelerometer, the ADXL345 from Analog Devices.
 
-**Note**: MRAA and UPM come pre-installed on the default DE10-Nano SD card image.
+**Note**: MRAA and UPM come pre-installed on the default DE10-Nano microSD card image.
 
 #### Programming Language
 Node.js\*
 
-[//]: # (Tudor, where are we viewing the Plotly graph? Are we connected to the board via HMDI?)
+[//]: # (Tudor, where are we viewing the Plotly graph? Are we connected to the board via HDMI?)
 
 ## Accelerometer Theory
 
@@ -60,8 +59,8 @@ There are two ways to use an accelerometer: acceleration and tilt. To understand
 
 ### Communicating with the Accelerometer
 
+## Steps
 Follow along with the steps below to get data from the DE10-Nano's built-in accelerometer and plot that data in graphing software.
-## Steps:
 
 1. Prepare the DE10-Nano development board to host the accelerometer application
 
@@ -84,18 +83,20 @@ Node Package Manager (NPM)
 [//]: # (block diagram or picture of how everything is connected to the board?)
 
 ### Connect the board to the internet
+Newer versions of the DE10-Nano image will contain drivers for most USB Wi-Fi dongles. Unfortunately this exercise does not cover setting up a wireless connection.
+
+[//]: # (connect a keyboard and mouse?)
 
 First connect the DE10-Nano board to the internet and get a static IP.
+
 [//]: # (Reason we need to connect to the internet is to do opkg??)
-[//]: # Most importantly to do a git clone on the source code for this tutorial.
+
+[//]: # (Most importantly to do a git clone on the source code for this tutorial.)
 
 1. Run an Ethernet cable from the DE10-Nano board to a router.
+**Note**: There are two different network interfaces on the DE10-Nano board: 1) Ethernet interface (ETH0) and 2) USB RNDIS (Ethernet over USB, interface USB0). In this exercise we use the Ethernet interface. 
 
 #### Get a static IP
-By default, the Ethernet interface on the board is set to Dynamic Host Configuration Protocol (DHCP) mode, thus it will automatically ask for an IP address from the router that the board was plugged into.
-
-The process of connecting to the DE10-Nano and hosting the graphing webpage is made a lot easier by configuring the router to assign a static IP to the board (based on the MAC address of the Ethernet interface).
-Most modern routers are able to do this even with DHCP assignment turned on. By setting a static IP you won't have to edit the client configuration every time you are assigned a new IP address by the router.
 
 Run the following command to force a static IP on the eth0 interface with connman:
 
@@ -106,15 +107,20 @@ Where:
  * *subnet_mask* -  bit mask used to determine what subnet the IP address belongs to. E.g. *255.255.255.0*.
  * *gateway_ip* - will be your gateway/router IP address. E.g. *192.168.1.1*.
 
-To go back to DHCP mode use:
+By default, the Ethernet interface on the board is set to Dynamic Host Configuration Protocol (DHCP) mode, thus it will automatically ask for an IP address from the router that the board was plugged into.
+
+The process of connecting to the DE10-Nano and hosting the graphing webpage is made a lot easier by configuring the router to assign a static IP to the board (based on the MAC address of the Ethernet interface).
+
+Most modern routers are able to do this even with DHCP assignment turned on. By setting a static IP you won't have to edit the client configuration every time you are assigned a new IP address by the router.
+
+##### Return to DHCP mode
+If you need to revert the changes made to the ETH0 interface and return to using DHCP mode, type the command:
 `connmanctl config ethernet_000000000000_cable --ipv4 dhcp`
 
-Note: newer versions of the DE10-Nano image will contain drivers for most USB WiFi dongles. Unfortunately this exercise does not cover setting up a wireless connection.
-
 #### Remote SSH connection
+Now that you have a static IP, we can switch over to an SSH connection. Using an SSH connection will be faster, more secure and allows for file transfer to and from the board. This will be useful if you want to change the plot settings (remove one of the axes, add small data points, change the curve, etc.). This will also allow you to change the project files on the board after running the sample application. 
 
-The guide assumes that so far you have been using a Serial connection to the board to perform the initial setup. Once you have the IP of the board, it's easier to switch to SSH.
-To connect to the board use a SSH client like Putty or TeraTerm you will have to setup a password for the root account. This can be changed by running the `passwd` command.
+The guide assumes that so far you have been using a Serial connection to the board to perform the initial setup. To connect to the board use a SSH client like Putty or TeraTerm you will have to setup a password for the root account. This can be changed by running the `passwd` command.
 
 It is possible to connect without using a password too, although not really recommended, by changing the following line in `/etc/shadow`:
 
@@ -153,94 +159,7 @@ opkg update
 
 This command needs to be run again every time you make changes to the configuration file (e.g. adding a new repository).
 
-### Extend the micro SD card root partition
-[//]: # (May not be necessary because Dalon increased the size of the partition by default -- before there was 300 MB of free space -- but now Dalon freed up 1 GB -- and if necessary Dalon can free up more -- if needed. When you start compiling source code, you need more room.)
 
-To build and install the MRAA and UPM libraries natively on the DE10-Nano board, an 8 GB or larger uSD card is required. The uSD card included with the kit doesn't provide enough disk space for compiling the libraries.
-
-If the image has been deployed on a larger uSD card, the rootfs partition can be extended in order to claim the extra free space. This is an optional step and only recommended if you plan to install additional
-software on the board, collect big data, or build libraries and tools from source. Please keep in mind that the following instructions use `fdisk`, a powerful, low-level partitioning tool that may render the
-image unusable if done incorrectly. In case something goes wrong, you will lose all the data on the uSD card will and have to rewrite the OS image.
-
-For this we need the *e2fsprogs-resize2fs* tool, which can do a live resize a mounted partition live. It can be installed via opkg:
-
-```
-opkg install e2fsprogs-resize2fs
-````
-
-Then, run fdisk in interactive mode, and follow the steps shown. In short, we will list the existing partitions and take note of the start cylinder for the primary Linux partition (rootfs).
-After this, delete the partition and create it again, using the exact same starting cylinder (this is very important). For the end cylinder use the maximum value provided by your uSD card.
-This is generally the default value too. List the partitions again to check the changes and then write them. The warning received at the end is normal, since the file system is mounted and
-in use.
-
-```sh
-root@de10-nano:~# fdisk /dev/mmcblk0
-
-The number of cylinders for this disk is set to 236352.
-There is nothing wrong with that, but this is larger than 1024,
-and could in certain setups cause problems with:
-1) software that runs at boot time (e.g., old versions of LILO)
-2) booting and partitioning software from other OSs
-   (e.g., DOS FDISK, OS/2 FDISK)
-
-Command (m for help): p
-
-Disk /dev/mmcblk0: 15.4 GB, 15489564672 bytes
-4 heads, 32 sectors/track, 236352 cylinders
-Units = cylinders of 128 * 512 = 65536 bytes
-
-        Device Boot      Start         End      Blocks  Id System
-/dev/mmcblk0p1   *          49        1648      102400   c Win95 FAT32 (LBA)
-/dev/mmcblk0p2            1649       33648     2048000  83 Linux
-/dev/mmcblk0p3              17          48        2048  a2 Unknown
-
-Partition table entries are not in disk order
-
-Command (m for help): d
-Partition number (1-4): 2
-
-Command (m for help): n
-Command action
-   e   extended
-   p   primary partition (1-4)
-p
-Partition number (1-4): 2
-First cylinder (1-236352, default 1): 1649
-Last cylinder or +size or +sizeM or +sizeK (1649-236352, default 236352): Using default value 236352
-
-Command (m for help): p
-
-Disk /dev/mmcblk0: 15.4 GB, 15489564672 bytes
-4 heads, 32 sectors/track, 236352 cylinders
-Units = cylinders of 128 * 512 = 65536 bytes
-
-        Device Boot      Start         End      Blocks  Id System
-/dev/mmcblk0p1   *          49        1648      102400   c Win95 FAT32 (LBA)
-/dev/mmcblk0p2            1649      236352    15021056  83 Linux
-/dev/mmcblk0p3              17          48        2048  a2 Unknown
-
-Partition table entries are not in disk order
-
-Command (m for help): w
-The partition table has been altered.
-Calling ioctl() to re-read partition table
-fdisk: WARNING: rereading partition table failed, kernel still uses old table: Device or resource busy
-
-```
-
-* Insert screenshot of fdisk commands *
-
-Finally, run resize2fs to extend the partition that was modified:
-
-```
-resize2fs /dev/mmcblk0p2
-```
-
-[//]: # (comment.)
-
-[//]: # (Give the user another option -- include note about using the default microsd card and not having to deploy the image on a larger microsd card image.)
-
-[//]: # (Two major paths -- Tudor to elaborate.)
 
 ## Build and install the MRAA & UPM libraries
 
