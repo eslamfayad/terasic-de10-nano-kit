@@ -4,13 +4,13 @@
 [//]: # (opkg is a package manager -- a package is a pre-compiled application such as Plotly.)
 
 ## Purpose and Overview
-Data from the DE10-Nano's built-in 3-axis accelerometer is measured on ALL 3 axes to show when the board is in motion. The raw output of the accelerometer is converted to g-force values by a sensor library and then sent to graphing software for data visualization and interpretation. 
+Data from the DE10-Nano's built-in 3-axis accelerometer is measured on ALL 3 axes to show when the board is in motion. The raw output of the accelerometer is converted to g-force values by a sensor library and then sent to graphing software for data visualization and interpretation.
 
 In this tutorial you will:
 * Interface with the board's built-in digital accelerometer using an I2C\* interface.
 * Use Intel’s I/O and sensor libraries (MRAA and UPM) to get data from the accelerometer.
 * Learn how to use opkg to install additional software libraries and tools.
-* Monitor acceleration data by tapping or gently shaking the board 
+* Monitor acceleration data by tapping or gently shaking the board
 * Translate the acceleration data into +/- g-force values to demonstrate the motion of the DE10-Nano board.
 * Show the accelerometer data using different open-source technologies: Express\* (web server), Plotly\* (graphing library), and Websockets\*(data stream).
 
@@ -53,7 +53,7 @@ Node.js\*
 ## Accelerometer Theory
 
 ### Speeding Up, Slowing Down, Changing Direction
-Accelerometers, these devices are the reason your smart phone or tablet knows up from down. They're sensors that measure acceleration (that includes speeding up, slowing down or changing direction) and by detecting changes in orientation (speed and direction along the x, y, and z axes) an accelerometer enables your smart phone to reorient itself when you rotate it by say 90 degrees (lay it on its side to watch a YouTube\* video). 
+Accelerometers, these devices are the reason your smart phone or tablet knows up from down. They're sensors that measure acceleration (that includes speeding up, slowing down or changing direction) and by detecting changes in orientation (speed and direction along the x, y, and z axes) an accelerometer enables your smart phone to reorient itself when you rotate it by say 90 degrees (lay it on its side to watch a YouTube\* video).
 
 There are two ways to use an accelerometer: acceleration and tilt. To understand tilt, think about the incline of that shelf you installed yourself. Here we use a 3-axis accelerometer and measure acceleration along all 3 axes (x, y, and z).
 
@@ -94,7 +94,7 @@ First connect the DE10-Nano board to the internet and get a static IP.
 [//]: # (Most importantly to do a git clone on the source code for this tutorial.)
 
 1. Run an Ethernet cable from the DE10-Nano board to a router.
-**Note**: There are two different network interfaces on the DE10-Nano board: 1) Ethernet interface (ETH0) and 2) USB RNDIS (Ethernet over USB, interface USB0). In this exercise we use the Ethernet interface. 
+**Note**: There are two different network interfaces on the DE10-Nano board: 1) Ethernet interface (ETH0) and 2) USB RNDIS (Ethernet over USB, interface USB0). In this exercise we use the Ethernet interface.
 
 #### Get a static IP
 
@@ -118,7 +118,7 @@ If you need to revert the changes made to the ETH0 interface and return to using
 `connmanctl config ethernet_000000000000_cable --ipv4 dhcp`
 
 #### Remote SSH connection
-Now that you have a static IP, we can switch over to an SSH connection. Using an SSH connection will be faster, more secure and allows for file transfer to and from the board. This will be useful if you want to change the plot settings (remove one of the axes, add small data points, change the curve, etc.). This will also allow you to change the project files on the board after running the sample application. 
+Now that you have a static IP, we can switch over to an SSH connection. Using an SSH connection will be faster, more secure and allows for file transfer to and from the board. This will be useful if you want to change the plot settings (remove one of the axes, add small data points, change the curve, etc.). This will also allow you to change the project files on the board after running the sample application.
 
 The guide assumes that so far you have been using a Serial connection to the board to perform the initial setup. To connect to the board use a SSH client like Putty or TeraTerm you will have to setup a password for the root account. This can be changed by running the `passwd` command.
 
@@ -145,11 +145,7 @@ This changes the root account password from null to an empty password and will a
 One of the benefits of having the board connected to the Internet is access to the Angstrom package repositories. These provide additional software tools and libraries, which can be installed very easily with the included
 package manager. Open PacKaGe Manager (or **opkg** in short) is a lightweight package manager intended for embedded devices. You can learn more about it [here](https://wiki.openwrt.org/doc/techref/opkg).
 
-The default opkg configuration file is:
-
-```
-/etc/opkg.conf
-```
+Default opkg configuration files are located under `/etc/opkg/`.
 
 To update the list of available packages run:
 
@@ -158,8 +154,6 @@ opkg update
 ```
 
 This command needs to be run again every time you make changes to the configuration file (e.g. adding a new repository).
-
-
 
 ## Build and install the MRAA & UPM libraries
 
@@ -266,6 +260,12 @@ Client side code can be found in the `public/js/index.js` file. On the client si
 var connection = new WebSocket('ws://192.168.1.10:3001'); // Change to match your own DE10-Nano IP
 ```
 
+Also match the number of messages sent by the server per second:
+
+```js
+var messagesPerSecond = 10; // Change to match your server data rate
+```
+
 Then, we deserialize the JSON acceleration data received from the server and update the plot:
 
 ```js
@@ -275,13 +275,15 @@ connection.onmessage = function (message) {
         var adxlData = JSON.parse(message.data); // Deserialize incoming JSON acceleration data
 
         // Divide the X axis by the number of messages received per second, so that major units are elapsed seconds
+        var ts = messagesReceived/messagesPerSecond;
+
         var newData = {
-            x: [[messagesReceived/10], [messagesReceived/10], [messagesReceived/10]],
+            x: [[ts], [ts], [ts]],
             y: [[adxlData.x], [adxlData.y], [adxlData.z]]
         }
 
         // Extend the current graph, last integer here is the number of X values to keep before discarding old data
-        Plotly.extendTraces('myDiv', newData, [0, 1, 2], 30);
+        Plotly.extendTraces('myDiv', newData, [0, 1, 2], 60 * messagesPerSecond);
         messagesReceived++;
     } catch (e) {
         console.log('This doesn\'t look like valid JSON: ', message.data);
