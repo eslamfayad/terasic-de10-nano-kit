@@ -81,11 +81,18 @@ The Plotly\* graphing library is used to visualize the data in the form of a rea
 [//]: # (Dalon's going to install node.js and npm on the sd card -- tentative.)
 
 ## Prepare your DE10-Nano
+
 [//]: # (Plug into the hmdi port? What other ports on the board are used here? He's probably using rj45 -- the name of the connector used for Ethernet -- big square silver box -- )
+
 [//]: # (connect a keyboard and mouse?)
+
 [//]: # (block diagram or picture of how everything is connected to the board?)
 
-### Connect the board to the internet
+**Note**: At this point, we assume you've already gone through the initial assembly and setup for the DE10-Nano kit. The microSD card that came with the Terasic\* DE10-Nano kit should be inserted into the board's microsd card slot and your board should be powered on. 
+
+For instructions on board assembly and setup, check out the [DE10-Nano Setup(https://software.intel.com/en-us/de10-nano-setup) from DE10-Nano Get Started Guide.
+
+### Connect the Board to the Internet
 Newer versions of the DE10-Nano image will contain drivers for most USB Wi-Fi dongles. Unfortunately this exercise does not cover setting up a wireless connection.
 
 [//]: # (connect a keyboard and mouse?)
@@ -97,6 +104,7 @@ First connect the DE10-Nano board to the internet and get a static IP.
 [//]: # (Most importantly to do a git clone on the source code for this tutorial.)
 
 1. Run an Ethernet cable from the DE10-Nano board to a router.
+
 **Note**: There are two different network interfaces on the DE10-Nano board: 1) Ethernet interface (ETH0) and 2) USB RNDIS (Ethernet over USB, interface USB0). In this exercise we use the Ethernet interface.
 
 [//]: # (point user to page in IDZ book to avoid duplication of instructions)
@@ -141,10 +149,10 @@ root:U6aMy0wojraho:17247:0:99999:7:::
 
 This changes the root account password from null to an empty password and will allow SSH connections without any other hassle (like public keys).
 
-## Cloning the GitHub Repository
+## Clone the GitHub Repository
 [//]: # (Tudor to add these steps)
 
-## Installing Express\*, Websocket\* and Plotly\*
+## Install Express\*, Websocket\* and Plotly\*
 [//]: # (Dalon installed node.js because it's a requirement but node.js npm install <-- Dalon doesn't know what that is. If possible, Dalon wants to pre-install as many items as possible on the sd card.)
 
 [//]: # (not on the sd card but it gets pulled in when you run npm install)
@@ -154,9 +162,11 @@ When using the sample code from this repository, Express, Websocket and Plotly w
 
 ## Unbind the ADXL345 Driver
 
-## Setting up the server
+## Set Up the Server
 
 [//]: # (Tudor to include command on how to set up node_path -- which is an environment variable)
+
+### Environment Variable Setup
 
 ```
 export NODE_PATH=/usr/lib/node_modules
@@ -174,7 +184,7 @@ npm start
 
 
 ## Getting accelerometer data and plotting
-[//]: # (need to add step for opening browser)
+[//]: # (Tudor to add step for opening browser)
 
 There are a few key components to this application that allow reading data from the accelerometer and pushing it to the client.
 
