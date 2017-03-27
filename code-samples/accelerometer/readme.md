@@ -88,9 +88,9 @@ The Plotly\* graphing library is used to visualize the data in the form of a rea
 
 [//]: # (block diagram or picture of how everything is connected to the board?)
 
-**Note**: At this point, we assume you've already gone through the initial assembly and setup for the DE10-Nano kit. The microSD card that came with the Terasic\* DE10-Nano kit should be inserted into the board's microsd card slot and your board should be powered on. 
+**Note**: At this point, we assume you've already gone through the initial assembly and setup for the DE10-Nano kit. The microSD card that came with the Terasic\* DE10-Nano kit should be inserted into the board's microSD card slot and your board should be powered on. 
 
-For instructions on board assembly and setup, check out the [DE10-Nano Setup(https://software.intel.com/en-us/de10-nano-setup) from DE10-Nano Get Started Guide.
+For instructions on board assembly and setup, check out the [DE10-Nano Setup](https://software.intel.com/en-us/de10-nano-setup) from DE10-Nano Get Started Guide.
 
 ### Connect the Board to the Internet
 Newer versions of the DE10-Nano image will contain drivers for most USB Wi-Fi dongles. Unfortunately this exercise does not cover setting up a wireless connection.
