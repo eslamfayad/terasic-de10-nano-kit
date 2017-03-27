@@ -88,7 +88,8 @@ The Plotly\* graphing library is used to visualize the data in the form of a rea
 
 [//]: # (block diagram or picture of how everything is connected to the board?)
 
-**Note**: At this point, we assume you've already gone through the initial assembly and setup for the DE10-Nano kit. The microSD card that came with the Terasic\* DE10-Nano kit should be inserted into the board's microSD card slot and your board should be powered on. 
+#### Checkpoint: Have you gone through the initial assembly and setup of the DE10-Nano board? 
+At this point, we assume you've already gone through the initial assembly and setup for the DE10-Nano kit. The microSD card that came with the Terasic\* DE10-Nano kit should be inserted into the board's microSD card slot and your board should be powered on. Go through this process first!
 
 For instructions on board assembly and setup, check out the [DE10-Nano Setup](https://software.intel.com/en-us/de10-nano-setup) from DE10-Nano Get Started Guide.
 
