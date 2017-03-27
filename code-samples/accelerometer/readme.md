@@ -93,11 +93,12 @@ The Plotly\* graphing library is used to visualize the data in the form of a rea
 For instructions on board assembly and setup, check out the [DE10-Nano Setup](https://software.intel.com/en-us/de10-nano-setup) from DE10-Nano Get Started Guide.
 
 ### Connect the Board to the Internet
-Newer versions of the DE10-Nano image will contain drivers for most USB Wi-Fi dongles. Unfortunately this exercise does not cover setting up a wireless connection.
 
 [//]: # (connect a keyboard and mouse?)
 
 First connect the DE10-Nano board to the internet and get a static IP.
+
+**Note**: Newer versions of the DE10-Nano image will contain drivers for most USB Wi-Fi dongles. Unfortunately this exercise does not cover setting up a wireless connection.
 
 [//]: # (Reason we need to connect to the internet is to do opkg??)
 
