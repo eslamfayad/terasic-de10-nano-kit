@@ -66,18 +66,26 @@ Follow along with the steps below to get data from the DE10-Nano's built-in acce
 
 [//]: # (java bindings are not enabled for the pre-installed packages. And the reason, the version of Angstrom we are using... the java packages don't compile)
 
-2. Setup a basic Express.js webserver
+2. Clone the GitHub\* repository 
+
+3. Install Express\*, Websocket\* and Plotly\*
+
+4. Setup an Express.js webserver
 This webserver uses WebSockets\* to push live data captured from the accelerometer to the client's browser.
 
-3. Generate a real-time plot using Plotly\*
+5. Unbind the ADXL345 Driver
+
+6. Generate a real-time plot using Plotly\*
 The Plotly\* graphing library is used to visualize the data in the form of a real-time plot. The page is accessible from almost any browser/device combo.
+
+7. Observe the types of forces acting on the board
 
 [//]: # (Dalon installed node.js and npm on the microSD card)
 
-## Prepare your DE10-Nano
+## Step 1: Prepare your DE10-Nano
 
 #### Checkpoint: Have you gone through the initial assembly and setup of the DE10-Nano board?
-At this point, we assume you've already gone through the initial assembly and setup for the DE10-Nano kit. The microSD card that came with the Terasic\* DE10-Nano kit should be inserted into the board's microSD card slot and your board should be powered on. Go through this process first!
+At this point, we assume you've already gone through the initial assembly and setup for the DE10-Nano kit. The microSD card that came with the Terasic\* DE10-Nano kit should be inserted into the board's microSD card slot and your board should be powered on. Go through the assembly and setup process first!
 
 For instructions on board assembly and setup, check out the [DE10-Nano Setup](https://software.intel.com/en-us/de10-nano-setup) from the DE10-Nano Get Started Guide.
 
@@ -139,7 +147,7 @@ root:U6aMy0wojraho:17247:0:99999:7:::
 
 This changes the root account password from null to an empty password and will allow SSH connections without any other hassle (like public keys).
 
-## Clone the GitHub Repository
+## Step 2: Clone the GitHub Repository
 
 [//]: # (Express, Websockets, and Plotly are not on the microSD card but they get pulled in when you run npm install)
 
@@ -155,12 +163,12 @@ git clone https://github.com/intel-iot-devkit/terasic-de10-nano-kit.git
 This will create a new folder named `terasic-de10-nano-kit` in the current directory.
 The source code files for the accelerometer tutorial can be found under `terasic-de10-nano-kit/code-samples/accelerometer/de10-adxl345`.
 
-## Install Express\*, Websocket\* and Plotly\*
+## Step 3: Install Express\*, Websocket\* and Plotly\*
 
 When using the sample code from this repository, Express, Websocket and Plotly will get installed by running
 `npm install` in the application folder.
 
-## Unbind the ADXL345 Driver
+## Step 4: Unbind the ADXL345 Driver
 
 By default the adxl34x driver will bind with device 0-0053, you can see that in the directory listing below:
 
@@ -198,7 +206,7 @@ root@de10-nano:~# ls /sys/bus/i2c/drivers/adxl34x
 
 **Note**: Rebinding the driver is required in case you want to run other accelerometer samples (hint: another accelerometer sample for tilt is included on the microSD card image).
 
-## Setting up and Starting the Server
+## Step 5: Setup an Express web server
 
 ### Setting the Node.js module lookup path
 
@@ -233,7 +241,7 @@ Starting Express\* is as simple as typing the following command:
 npm start
 ```
 
-## Getting accelerometer data and plotting
+## Step 6: Generate a real-time plot using Plotly\*
 
 There are a few key components to this application that allow reading data from the accelerometer and pushing it to the client.
 
@@ -300,7 +308,7 @@ http://<device_ip>:3000
 
 Keep in mind that the current setup will refresh the data approximately 10 times a second. Feel free to try different values to show more or less data.
 
-## Observations
+## Observe the Types of Forces Acting on the Board
 
 [//]: # (Tudor to add board + axes overlay -- give Tudor spcm graphics folder URL)
 [//]: # (Do we/can we calibrate this thing?)
