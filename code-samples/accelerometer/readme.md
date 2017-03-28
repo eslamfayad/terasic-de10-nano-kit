@@ -253,12 +253,13 @@ Keep in mind that the current setup will refresh the data approximately 10 times
 [//]: # (Do we calibrate this thing?)
 ### Static Forces 
 * Gravity?
+[//]: # (Can we measure gravity with this thing? Just dynamic forces for this tutorial?)
 
 ### Dynamic Forces
-1. Movement
+**Movement**
 * Motion along the x, y, and z axis
 
-1. Vibration
+**Vibration**
 The sensitivity of accelerometers... by gently tapping the board... we can observe tiny minute changes in acceleration...
 * Tapping the board
 * Lightly Dropping the Board/ drum on on the table 
