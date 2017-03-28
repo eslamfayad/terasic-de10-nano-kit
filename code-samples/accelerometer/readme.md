@@ -244,7 +244,7 @@ Starting Express\* is as simple as typing the following command:
 npm start
 ```
 
-## Step 6: Generate a real-time plot using Plotly\*
+## Step 6: Generate a Real-time Plot Using Plotly\*
 
 
 The Plotly\* graphing library is used to visualize the data in the form of a real-time plot. The page is accessible from almost any browser/device combo.
