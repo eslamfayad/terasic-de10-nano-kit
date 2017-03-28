@@ -251,15 +251,17 @@ Keep in mind that the current setup will refresh the data approximately 10 times
 [//]: # (Tudor to add GIF)
 [//]: # (Tudor to add board + axes overlay)
 [//]: # (Do we calibrate this thing?)
+
 ### Static Forces 
 * Gravity?
+
 [//]: # (Can we measure gravity with this thing? Just dynamic forces for this tutorial?)
 
 ### Dynamic Forces
-**Movement**
+1. Movement
 * Motion along the x, y, and z axis
 
-**Vibration**
+2. Vibration
 The sensitivity of accelerometers... by gently tapping the board... we can observe tiny minute changes in acceleration...
 * Tapping the board
 * Lightly Dropping the Board/ drum on on the table 
