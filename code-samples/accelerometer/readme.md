@@ -39,7 +39,7 @@ MRAA is an I/O library (abstraction layer) that creates a common interface acros
 
 [//]: # (EG changed below description. Check with Tudor for accuracy.)
 
-UPM is a sensor library that provides software drivers for a wide variety of commonly used sensors including the de10-nano's on-board accelerometer. These software drivers interact with the underlying hardware platform through calls to MRAA APIs. In this tutorial, the UPM library is used to read data from the board's built-in 3-axis digital accelerometer, the ADXL345 from Analog Devices.
+UPM is a sensor library that provides software drivers for a wide variety of commonly used sensors including the DE10-nano's on-board accelerometer. These software drivers interact with the underlying hardware platform through calls to MRAA APIs. In this tutorial, the UPM library is used to read data from the board's built-in 3-axis digital accelerometer, the ADXL345 from Analog Devices.
 
 **Note**: MRAA and UPM come pre-installed on the default DE10-Nano microSD card image.
 
@@ -55,7 +55,7 @@ There are two ways to use an accelerometer: acceleration and tilt. Here we use a
 
 ### Communicating with the Accelerometer
 
-Here, we interface with the board's built-in digital accelerometer using an I2C\* interface. The ARM\* processor communicates with the accelerometer...
+Here, we interface with the board's built-in digital accelerometer using an I2C\* interface. The I2C bus is physically wired up to the ARM\* processor on the SoC. 
 
 ## Tutorial Steps
 Follow along with the steps below to get data from the DE10-Nano's built-in accelerometer and plot that data in graphing software.
@@ -102,17 +102,12 @@ First connect the DE10-Nano board to the internet and get a static IP.
 Run the following command to force a static IP on the eth0 interface with connman:
 
 `connmanctl config ethernet_000000000000_cable --ipv4 manual <device_ip> <subnet_mask> <gateway_ip>`
-
-Where:
- * *device_ip* - the IP address you want to assign to the DE10-Nano. E.g. *192.168.1.10*.
- * *subnet_mask* -  bit mask used to determine what subnet the IP address belongs to. E.g. *255.255.255.0*.
- * *gateway_ip* - will be your gateway/router IP address. E.g. *192.168.1.1*.
  
-|Item | Description | Example |
+| Variable | Description | Example |
 | --- | --- | --- |
-| device_ip | the IP address you want to assign to the DE10-Nano | 192.168.1.10 |
-|subnet_mask| bit mask to determine what subnet the IP address belongs to | 255.255.255.0 |
-| gateway_ip | gateway/router IP address | 192.168.1.1 | 
+| <device_ip> | the IP address you want to assign to the DE10-Nano | 192.168.1.10 |
+| <subnet_mask> | bit mask to determine what subnet the IP address belongs to | 255.255.255.0 |
+| <gateway_ip> | gateway/router IP address | 192.168.1.1 | 
 
 
 By default, the Ethernet interface on the board is set to Dynamic Host Configuration Protocol (DHCP) mode, thus it will automatically ask for an IP address from the router that the board was plugged into.
@@ -145,16 +140,13 @@ root:U6aMy0wojraho:17247:0:99999:7:::
 This changes the root account password from null to an empty password and will allow SSH connections without any other hassle (like public keys).
 
 ## Clone the GitHub Repository
-[//]: # (Tudor to add these steps)
-
-## Install Express\*, Websockets\* and Plotly\*
 
 [//]: # (Express, Websockets, and Plotly are not on the microSD card but they get pulled in when you run npm install)
 
 [//]: # (Plotly graph viewed on the host PC or your laptop)
 
 Cloning the Github repository which includes the source code for this sample is a straightforward process. The Git client is part of the DE10-Nano image.
-To clone the repository type the following command in your SSH seesion:
+To clone the repository type the following command in your SSH session:
 
 ```
 git clone https://github.com/intel-iot-devkit/terasic-de10-nano-kit.git
@@ -164,16 +156,48 @@ This will create a new folder named `terasic-de10-nano-kit` in the current direc
 The source code files for the accelerometer tutorial can be found under `terasic-de10-nano-kit/code-samples/accelerometer/de10-adxl345`.
 
 ## Install Express\*, Websocket\* and Plotly\*
-[//]: # (Dalon installed node.js because it's a requirement but node.js npm install <-- Dalon doesn't know what that is. If possible, Dalon wants to pre-install as many items as possible on the sd card.)
 
 When using the sample code from this repository, Express, Websocket and Plotly will get installed by running
 `npm install` in the application folder.
 
 ## Unbind the ADXL345 Driver
 
-## Setting up and starting the server
+By default the adxl34x driver will bind with device 0-0053, you can see that in the directory listing below:
 
-[//]: # (Tudor to include command on how to set up node_path -- which is an environment variable)
+```
+root@de10-nano:~# ls /sys/bus/i2c/drivers/adxl34x
+0-0053  bind    uevent  unbind 
+```
+
+To unbind the driver you echo the device name to the unbind psuedo file in the sysfs like this:
+
+```
+root@de10-nano:~# echo 0-0053 > /sys/bus/i2c/drivers/adxl34x/unbind
+```
+
+Notice that the device is no longer present in this directory:
+
+```
+root@de10-nano:~# ls /sys/bus/i2c/drivers/adxl34x                    
+bind    uevent  unbind 
+```
+
+To bind the device you echo the device name to the bind psuedo file in the sysfs like this:
+
+```
+root@de10-nano:~# echo 0-0053 > /sys/bus/i2c/drivers/adxl34x/bind    
+[  871.268013] input: ADXL34x accelerometer as /devices/platform/soc/ffc04000.i2c/i2c-0/0-0053/input/input5
+```
+
+Notice that the device is back:
+
+```
+root@de10-nano:~# ls /sys/bus/i2c/drivers/adxl34x                 
+0-0053  bind    uevent  unbind 
+```
+
+## Setting up and Starting the Server
+
 
 ### Setting the Node.js module lookup path
 
