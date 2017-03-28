@@ -301,8 +301,8 @@ http://<device_ip>:3000
 Keep in mind that the current setup will refresh the data approximately 10 times a second. Feel free to try different values to show more or less data.
 
 ## Observations
-[//]: # (Tudor to add GIF)
-[//]: # (Tudor to add board + axes overlay)
+
+[//]: # (Tudor to add board + axes overlay -- give Tudor spcm graphics folder URL)
 [//]: # (Do we/can we calibrate this thing?)
 
 ### Static Forces
@@ -311,11 +311,15 @@ Keep in mind that the current setup will refresh the data approximately 10 times
 [//]: # (z axis when board is resting on its rubber feet. The force of gravity is always shown on the graph: 1g or 9.8 m/s^2.)
 
 ### Dynamic Forces
+
+[//]: # (Tudor to add GIF)
+
 1. Movement
 * Motion along the x, y, and z axis
 
 2. Vibration
 The sensitivity of accelerometers... by gently tapping the board... we can observe tiny minute changes in acceleration...
+
 * Tapping the board
 * Drumming on on the table
 
