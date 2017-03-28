@@ -1,4 +1,4 @@
-# DE10-Nano 3-axis Accelerometer
+# Interfacing with the Terasic DE10-Nano\* Board's Built-in 3-axis Digital Accelerometer
 
 [//]: # (This syntax works like a comment, and won't appear in any output.)
 
