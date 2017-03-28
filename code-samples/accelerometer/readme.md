@@ -76,7 +76,7 @@ The Plotly\* graphing library is used to visualize the data in the form of a rea
 
 ## Prepare your DE10-Nano
 
-#### Checkpoint: Have you gone through the initial assembly and setup of the DE10-Nano board? 
+#### Checkpoint: Have you gone through the initial assembly and setup of the DE10-Nano board?
 At this point, we assume you've already gone through the initial assembly and setup for the DE10-Nano kit. The microSD card that came with the Terasic\* DE10-Nano kit should be inserted into the board's microSD card slot and your board should be powered on. Go through this process first!
 
 For instructions on board assembly and setup, check out the [DE10-Nano Setup](https://software.intel.com/en-us/de10-nano-setup) from the DE10-Nano Get Started Guide.
@@ -153,32 +153,60 @@ This changes the root account password from null to an empty password and will a
 
 [//]: # (Plotly graph viewed on the host PC or your laptop)
 
+Cloning the Github repository which includes the source code for this sample is a straightforward process. The Git client is part of the DE10-Nano image.
+To clone the repository type the following command in your SSH seesion:
+
+```
+git clone https://github.com/intel-iot-devkit/terasic-de10-nano-kit.git
+```
+
+This will create a new folder named `terasic-de10-nano-kit` in the current directory.
+The source code files for the accelerometer tutorial can be found under `terasic-de10-nano-kit/code-samples/accelerometer/de10-adxl345`.
+
+## Install Express\*, Websocket\* and Plotly\*
+[//]: # (Dalon installed node.js because it's a requirement but node.js npm install <-- Dalon doesn't know what that is. If possible, Dalon wants to pre-install as many items as possible on the sd card.)
 
 When using the sample code from this repository, Express, Websocket and Plotly will get installed by running
 `npm install` in the application folder.
 
 ## Unbind the ADXL345 Driver
 
-## Set Up the Server
+## Setting up and starting the server
 
 [//]: # (Tudor to include command on how to set up node_path -- which is an environment variable)
 
-### Environment Variable Setup
+### Setting the Node.js module lookup path
+
+Before we start the server, let's make sure Node.js knows where to find MRAA and UPM. To do this, we'll set the `NODE_PATH` environment variable:
 
 ```
 export NODE_PATH=/usr/lib/node_modules
 ```
 
+If you want to make this change permanent and have the `NODE_PATH` variable exported every time the board boots, use the following command:
+
+```
+echo "export NODE_PATH=/usr/lib/node_modules" > ~/.profile
+```
+
+### Starting the server
+
 Server side code is in the `app.js` file. This file was generated using an Express.js template and then extended to handle a WebSockets connection. More information on both
 concepts can be found under references. The server will also send accelerometer data periodically using the UPM ADXL345 library, as explained in the next section.
 
-[//]: # (Tudor to mention how to modify index.js for adding/changing the board's IP)
+Client side code can be found in the `public/js/index.js` file. On the client side, you will need to set the IP address of the DE10-Nano board:
+
+```js
+var connection = new WebSocket('ws://192.168.1.10:3001'); // Change to match your own DE10-Nano IP
+```
+
+You can use the built in `vi` editor to make the change. You are now ready to start the server.
 
 Starting Express\* is as simple as typing the following command:
+
 ```
 npm start
 ```
-
 
 ## Getting accelerometer data and plotting
 [//]: # (Tudor to add step for opening browser)
@@ -206,13 +234,7 @@ var gatherData = setInterval(function() {
 }, 100); // Send the data every 100 ms
 ```
 
-Client side code can be found in the `public/js/index.js` file. On the client side, you will need to set the IP address of the DE10-Nano board:
-
-```js
-var connection = new WebSocket('ws://192.168.1.10:3001'); // Change to match your own DE10-Nano IP
-```
-
-Also match the number of messages sent by the server per second:
+For the client side, first synchronize the number of messages sent by the server per second:
 
 ```js
 var messagesPerSecond = 10; // Change to match your server data rate
@@ -246,6 +268,12 @@ connection.onmessage = function (message) {
 
 The rest of the client side code defines the style of the graph according to the Plotly API.
 
+To view the graph, use any device connected to the same network as the DE10-Nano board, open a browser, and go to:
+
+```
+http://<device_ip>:3000
+```
+
 Keep in mind that the current setup will refresh the data approximately 10 times a second. Feel free to try different values to show more or less data.
 
 ## Observations
@@ -253,7 +281,7 @@ Keep in mind that the current setup will refresh the data approximately 10 times
 [//]: # (Tudor to add board + axes overlay)
 [//]: # (Do we/can we calibrate this thing?)
 
-### Static Forces 
+### Static Forces
 * Gravity?
 
 [//]: # (Can we measure gravity with this thing? Just dynamic forces for this tutorial?)
@@ -265,7 +293,7 @@ Keep in mind that the current setup will refresh the data approximately 10 times
 2. Vibration
 The sensitivity of accelerometers... by gently tapping the board... we can observe tiny minute changes in acceleration...
 * Tapping the board
-* Lightly Dropping the Board/ drum on on the table 
+* Lightly Dropping the Board/ drum on on the table
 Make sure the silicon rubber feet are attached to the copper standoffs when you...!
 
 ## Further steps and optimizations
