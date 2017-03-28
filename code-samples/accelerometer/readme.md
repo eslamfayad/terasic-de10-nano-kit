@@ -70,13 +70,11 @@ Follow along with the steps below to get data from the DE10-Nano's built-in acce
 
 3. Install Express\*, Websocket\* and Plotly\*
 
-4. Setup an Express.js webserver
-This webserver uses WebSockets\* to push live data captured from the accelerometer to the client's browser.
+4. Setup an Express.js Web server
 
-5. Unbind the ADXL345 Driver
+5. Unbind the ADXL345\* Driver
 
 6. Generate a real-time plot using Plotly\*
-The Plotly\* graphing library is used to visualize the data in the form of a real-time plot. The page is accessible from almost any browser/device combo.
 
 7. Observe the types of forces acting on the board
 
@@ -147,7 +145,7 @@ root:U6aMy0wojraho:17247:0:99999:7:::
 
 This changes the root account password from null to an empty password and will allow SSH connections without any other hassle (like public keys).
 
-## Step 2: Clone the GitHub Repository
+## Step 2: Clone the GitHub/* Repository
 
 [//]: # (Express, Websockets, and Plotly are not on the microSD card but they get pulled in when you run npm install)
 
@@ -168,7 +166,7 @@ The source code files for the accelerometer tutorial can be found under `terasic
 When using the sample code from this repository, Express, Websocket and Plotly will get installed by running
 `npm install` in the application folder.
 
-## Step 4: Unbind the ADXL345 Driver
+## Step 4: Unbind the ADXL345\* Driver
 
 By default the adxl34x driver will bind with device 0-0053, you can see that in the directory listing below:
 
@@ -206,9 +204,11 @@ root@de10-nano:~# ls /sys/bus/i2c/drivers/adxl34x
 
 **Note**: Rebinding the driver is required in case you want to run other accelerometer samples (hint: another accelerometer sample for tilt is included on the microSD card image).
 
-## Step 5: Setup an Express web server
+## Step 5: Setup an Express.js Webserver
 
-### Setting the Node.js module lookup path
+This webserver uses WebSockets\* to push live data captured from the accelerometer to the client's browser.
+
+### Set the Node.js module lookup path
 
 Before we start the server, let's make sure Node.js knows where to find MRAA and UPM. To do this, we'll set the `NODE_PATH` environment variable:
 
@@ -222,7 +222,7 @@ If you want to make this change permanent and have the `NODE_PATH` variable expo
 echo "export NODE_PATH=/usr/lib/node_modules" > ~/.profile
 ```
 
-### Starting the server
+### Start the Web server
 
 Server side code is in the `app.js` file. This file was generated using an Express.js template and then extended to handle a WebSockets connection. More information on both
 concepts can be found under references. The server will also send accelerometer data periodically using the UPM ADXL345 library, as explained in the next section.
@@ -242,6 +242,9 @@ npm start
 ```
 
 ## Step 6: Generate a real-time plot using Plotly\*
+
+
+The Plotly\* graphing library is used to visualize the data in the form of a real-time plot. The page is accessible from almost any browser/device combo.
 
 There are a few key components to this application that allow reading data from the accelerometer and pushing it to the client.
 
@@ -308,7 +311,7 @@ http://<device_ip>:3000
 
 Keep in mind that the current setup will refresh the data approximately 10 times a second. Feel free to try different values to show more or less data.
 
-## Observe the Types of Forces Acting on the Board
+## Step 7: Observe the Types of Forces Acting on the Board
 
 [//]: # (Tudor to add board + axes overlay -- give Tudor spcm graphics folder URL)
 [//]: # (Do we/can we calibrate this thing?)
@@ -333,7 +336,7 @@ The sensitivity of accelerometers... by gently tapping the board... we can obser
 
 Make sure the silicon rubber feet are attached to the copper standoffs when you...!
 
-## Further steps and optimizations
+## Further Steps and Optimizations
 
 On a PC or laptop, Plotly makes use of hardware acceleration (via webGL) for rendering the charts. Therefore you can work with large datasets, redraw often, and still be able to show responsive
 graphs. Unfortunately, this feature is unavailable on mobile browsers (e.g. tablets, smartphones). This means the plotting rate is directly impacted and limited to only a few updates per second
