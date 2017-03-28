@@ -36,6 +36,7 @@ In this tutorial you will:
 MRAA is an I/O library (abstraction layer) that creates a common interface across plaforms to access various I/O. Here MRAA is used to access the I2C interface connected to the accelerometer.
 
 * UPM
+
 [//]: # (EG changed below description. Check with Tudor for accuracy.)
 
 UPM is a sensor library that provides software drivers for a wide variety of commonly used sensors including the de10-nano's on-board accelerometer. These software drivers interact with the underlying hardware platform through calls to MRAA APIs. In this tutorial, the UPM library is used to read data from the board's built-in 3-axis digital accelerometer, the ADXL345 from Analog Devices.
@@ -63,8 +64,6 @@ Follow along with the steps below to get data from the DE10-Nano's built-in acce
 
 [//]: # (2. Build and install the MRAA and UPM libraries on the de10-nano board removed -- Dalon plans to release new versions semi-annually)
 
-[//]: # (Dalon added mraa and upm to the SD card... although neither include Java. May not need to opkg the mraa & upm libaries? How does affect the tutorial steps? No need to build and install mraa and upm libraries? What can we say about these libraries on the SD Card?)
-
 [//]: # (java bindings are not enabled for the pre-installed packages. And the reason, the version of Angstrom we are using... the java packages don't compile)
 
 2. Setup a basic Express.js webserver
@@ -73,7 +72,7 @@ This webserver uses WebSockets\* to push live data captured from the acceleromet
 3. Generate a real-time plot using Plotly\*
 The Plotly\* graphing library is used to visualize the data in the form of a real-time plot. The page is accessible from almost any browser/device combo.
 
-[//]: # (Dalon's going to install node.js and npm on the sd card -- tentative.)
+[//]: # (Dalon installed node.js and npm on the microSD card)
 
 ## Prepare your DE10-Nano
 
@@ -88,7 +87,7 @@ First connect the DE10-Nano board to the internet and get a static IP.
 
 **Note**: Newer versions of the DE10-Nano image will contain drivers for most USB Wi-Fi dongles. Unfortunately this exercise does not cover setting up a wireless connection.
 
-[//]: # (Reason we need to connect to the internet is to do opkg??)
+[//]: # (Reason we need to connect to the internet is to do opkg.)
 
 [//]: # (Most importantly to do a git clone on the source code for this tutorial.)
 
