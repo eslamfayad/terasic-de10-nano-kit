@@ -9,7 +9,7 @@ In this tutorial you will:
 * Interface with the board's built-in digital accelerometer using an I2C\* interface.
 * Use Intel’s I/O and sensor libraries (MRAA and UPM) to get data from the accelerometer.
 * Learn how to use opkg to install additional software libraries and tools.
-* Monitor acceleration data by tapping or gently shaking the board.
+* Monitor and observe acceleration data for small vibration and movement along the x, y, z axes.
 * Translate the acceleration data into +/- g-force values to demonstrate the motion of the DE10-Nano board.
 * Show the accelerometer data using different open-source technologies: Express\* (web server), Plotly\* (graphing library), and Websockets\*(data stream).
 
@@ -196,8 +196,9 @@ root@de10-nano:~# ls /sys/bus/i2c/drivers/adxl34x
 0-0053  bind    uevent  unbind 
 ```
 
-## Setting up and Starting the Server
+**Note**: Rebinding the driver is required in case you want to run other accelerometer samples (hint: another accelerometer sample for tilt is included on the microSD card image).
 
+## Setting up and Starting the Server
 
 ### Setting the Node.js module lookup path
 
@@ -233,7 +234,6 @@ npm start
 ```
 
 ## Getting accelerometer data and plotting
-[//]: # (Tudor to add step for opening browser)
 
 There are a few key components to this application that allow reading data from the accelerometer and pushing it to the client.
 
@@ -306,9 +306,9 @@ Keep in mind that the current setup will refresh the data approximately 10 times
 [//]: # (Do we/can we calibrate this thing?)
 
 ### Static Forces
-* Gravity?
+* Gravity
 
-[//]: # (Can we measure gravity with this thing? Just dynamic forces for this tutorial?)
+[//]: # (z axis when board is resting on its rubber feet. The force of gravity is always shown on the graph: 1g or 9.8 m/s^2.)
 
 ### Dynamic Forces
 1. Movement
@@ -317,7 +317,8 @@ Keep in mind that the current setup will refresh the data approximately 10 times
 2. Vibration
 The sensitivity of accelerometers... by gently tapping the board... we can observe tiny minute changes in acceleration...
 * Tapping the board
-* Lightly Dropping the Board/ drum on on the table
+* Drumming on on the table
+
 Make sure the silicon rubber feet are attached to the copper standoffs when you...!
 
 ## Further steps and optimizations
