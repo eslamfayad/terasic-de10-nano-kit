@@ -188,6 +188,17 @@ root@de10-nano:~# ls /sys/bus/i2c/drivers/adxl34x
 0-0053  bind    uevent  unbind 
 ```
 
+The adx34x kernel driver polls the accelerometer continuously and it will interfere with the MRAA library. Furthermore, it enables
+the auto-sleep feature on the ADXL345, which in turns adds significant delay when reading the values with the UPM driver.
+
+First, reconfigure the device:
+
+```
+root@de10-nano:~# echo 0 > /sys/bus/i2c/drivers/adxl34x/0-0053/autosleep
+root@de10-nano:~# echo 15 > /sys/bus/i2c/drivers/adxl34x/0-0053/rate
+
+```
+
 To unbind the driver you echo the device name to the unbind psuedo file in the sysfs like this:
 
 ```
@@ -201,7 +212,7 @@ root@de10-nano:~# ls /sys/bus/i2c/drivers/adxl34x
 bind    uevent  unbind 
 ```
 
-To bind the device you echo the device name to the bind psuedo file in the sysfs like this:
+To bind the device you echo the device name to the bind pseudo file in sysfs like this:
 
 ```
 root@de10-nano:~# echo 0-0053 > /sys/bus/i2c/drivers/adxl34x/bind    
@@ -216,6 +227,7 @@ root@de10-nano:~# ls /sys/bus/i2c/drivers/adxl34x
 ```
 
 **Note**: Rebinding the driver is required in case you want to run other accelerometer samples. (Hint: There maybe an accelerometer Easter egg hiding on the microSD card image... Go hunt for it!).
+Driver changes are not persistent after a reboot.
 
 ## Step 5: Setup an Express.js Webserver
 
