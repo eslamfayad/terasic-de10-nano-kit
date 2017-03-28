@@ -108,10 +108,10 @@ Where:
  * *subnet_mask* -  bit mask used to determine what subnet the IP address belongs to. E.g. *255.255.255.0*.
  * *gateway_ip* - will be your gateway/router IP address. E.g. *192.168.1.1*.
  
-| device_ip | subnet_mask | gateway_ip |
-| --- | --- | --- |
-| the IP address you want to assign to the DE10-Nano | bit mask to determine what subnet the IP address belongs to |  gateway/router IP address |
-| e.g., 192.168.1.10 | e.g., 255.255.255.0 | e.g., 192.168.1.1 |
+|Item | device_ip | subnet_mask | gateway_ip |
+| --- | --- | --- | --- | 
+|Description | the IP address you want to assign to the DE10-Nano | bit mask to determine what subnet the IP address belongs to |  gateway/router IP address |
+|Example| 192.168.1.10 | 255.255.255.0 | 192.168.1.1 |
 
 
 By default, the Ethernet interface on the board is set to Dynamic Host Configuration Protocol (DHCP) mode, thus it will automatically ask for an IP address from the router that the board was plugged into.
