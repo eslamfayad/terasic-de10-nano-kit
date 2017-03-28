@@ -11,7 +11,10 @@ In this tutorial you will:
 * Learn how to use opkg to install additional software libraries and tools.
 * Monitor and observe acceleration data for small vibration and movement along the x, y, z axes.
 * Translate the acceleration data into +/- g-force values to demonstrate the motion of the DE10-Nano board.
-* Show the accelerometer data using different open-source technologies: Express\* (web server), Plotly\* (graphing library), and Websockets\*(data stream).
+* Show the accelerometer data using different open-source technologies: 
+  * Express\* (web server)
+  * Plotly\* (graphing library)
+  * Websockets\*(data stream).
 
 **Note**: Both Express.js and Plotly.js are non-restrictive MIT licensed technologies.
 
