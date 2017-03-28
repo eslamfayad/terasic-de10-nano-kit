@@ -50,16 +50,18 @@ Node.js\*
 
 [//]: # (Tudor, where are we viewing the Plotly graph? Are we connected to the board via HDMI?)
 
+[//]: # (Plotly graph viewed on the host PC or your laptop)
+
 ## Accelerometer Theory
 
 ### Speeding Up, Slowing Down, Changing Direction
-Accelerometers are the devices in your smart phone or tablet which can sense up from down. They're sensors that measure acceleration (that includes speeding up, slowing down or changing direction) and by detecting changes in orientation (speed and direction along the x, y, and z axes) an accelerometer enables your smart phone to reorient itself when you rotate it by say 90 degrees (lay it on its side to watch a YouTube\* video).
+How does your smart phone know which way is up? And how does it know to change its orientation from portrait to landscape when you rotate your device by 90 degrees clockwise? These motion smart features come courtesy of an accelerometer. An accelerometer is a sensor that measures acceleration (relative to its own frame of reference). You may remember from physics what when velocity—speed with direction—is changing, acceleration is happening. Acceleration includes speeding up, slowing down or changing direction and by detecting changes in orientation (along the x, y, and z axes) an accelerometer...
 
 There are two ways to use an accelerometer: acceleration and tilt. Here we use a 3-axis accelerometer to measure acceleration along all 3 axes (x, y, and z).
 
 ### Communicating with the Accelerometer
-[//]: # (add some text here) 
-The ARM\* processor communicates with the accelerometer.
+
+Here, we interface with the board's built-in digital accelerometer using an I2C\* interface. The ARM\* processor communicates with the accelerometer...
 
 ## Tutorial Steps
 Follow along with the steps below to get data from the DE10-Nano's built-in accelerometer and plot that data in graphing software.
@@ -248,6 +250,19 @@ Keep in mind that the current setup will refresh the data approximately 10 times
 ## Observations
 [//]: # (Tudor to add GIF)
 [//]: # (Tudor to add board + axes overlay)
+[//]: # (Do we calibrate this thing?)
+### Static Forces 
+* Gravity?
+
+### Dynamic Forces
+1. Movement
+* Motion along the x, y, and z axis
+
+1. Vibration
+The sensitivity of accelerometers... by gently tapping the board... we can observe tiny minute changes in acceleration...
+* Tapping the board
+* Lightly Dropping the Board/ drum on on the table 
+Make sure the silicon rubber feet are attached to the copper standoffs when you...!
 
 ## Further steps and optimizations
 
