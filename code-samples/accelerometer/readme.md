@@ -1,7 +1,6 @@
-# DE10-Nano on-board Accelerometer
+# DE10-Nano 3-axis Accelerometer
 
 [//]: # (This syntax works like a comment, and won't appear in any output.)
-[//]: # (opkg is a package manager -- a package is a pre-compiled application such as Plotly.)
 
 ## Purpose and Overview
 Data from the DE10-Nano's built-in 3-axis accelerometer is measured on ALL 3 axes to show when the board is in motion. The raw output of the accelerometer is converted to g-force values by a sensor library and then sent to graphing software for data visualization and interpretation.
@@ -13,8 +12,6 @@ In this tutorial you will:
 * Monitor acceleration data by tapping or gently shaking the board.
 * Translate the acceleration data into +/- g-force values to demonstrate the motion of the DE10-Nano board.
 * Show the accelerometer data using different open-source technologies: Express\* (web server), Plotly\* (graphing library), and Websockets\*(data stream).
-
-[//]: # (Keeping track of the g-forces on the board.)
 
 **Note**: Both Express.js and Plotly.js are non-restrictive MIT licensed technologies.
 
@@ -31,26 +28,22 @@ In this tutorial you will:
 
 [//]: # (This syntax works like a comment, and won't appear in any output.)
 
-
-[//]: # (Description of MRAA and UPM and provide further links.)
-
 #### Libraries
-[//]: # (Dalon, can you help build these descriptions out? Descriptions specifically related to this exercise?)
+[//]: # (Dalon helped to build out the below descriptions.)
 
 * MRAA
+
 MRAA is an I/O library (abstraction layer) that creates a common interface across plaforms to access various I/O. Here MRAA is used to access the I2C interface connected to the accelerometer.
 
 * UPM
-UPM is a sensor library that supports various sensors including the de10-nano's built-in accelerometer. The UPM library is used to read data from the board's built-in 3-axis accelerometer, the ADXL345 from Analog Devices.
+[//]: # (EG changed below description. Check with Tudor for accuracy.)
+
+UPM is a sensor library that provides software drivers for a wide variety of commonly used sensors including the de10-nano's on-board accelerometer. These software drivers interact with the underlying hardware platform through calls to MRAA APIs. In this tutorial, the UPM library is used to read data from the board's built-in 3-axis digital accelerometer, the ADXL345 from Analog Devices.
 
 **Note**: MRAA and UPM come pre-installed on the default DE10-Nano microSD card image.
 
 #### Programming Language
 Node.js\*
-
-[//]: # (Tudor, where are we viewing the Plotly graph? Are we connected to the board via HDMI?)
-
-[//]: # (Plotly graph viewed on the host PC or your laptop)
 
 ## Accelerometer Theory
 
@@ -148,10 +141,12 @@ This changes the root account password from null to an empty password and will a
 ## Clone the GitHub Repository
 [//]: # (Tudor to add these steps)
 
-## Install Express\*, Websocket\* and Plotly\*
-[//]: # (Dalon installed node.js because it's a requirement but node.js npm install <-- Dalon doesn't know what that is. If possible, Dalon wants to pre-install as many items as possible on the sd card.)
+## Install Express\*, Websockets\* and Plotly\*
 
-[//]: # (not on the sd card but it gets pulled in when you run npm install)
+[//]: # (Express, Websockets, and Plotly are not on the microSD card but they get pulled in when you run npm install)
+
+[//]: # (Plotly graph viewed on the host PC or your laptop)
+
 
 When using the sample code from this repository, Express, Websocket and Plotly will get installed by running
 `npm install` in the application folder.
@@ -250,7 +245,7 @@ Keep in mind that the current setup will refresh the data approximately 10 times
 ## Observations
 [//]: # (Tudor to add GIF)
 [//]: # (Tudor to add board + axes overlay)
-[//]: # (Do we calibrate this thing?)
+[//]: # (Do we/can we calibrate this thing?)
 
 ### Static Forces 
 * Gravity?
