@@ -138,21 +138,7 @@ If you need to revert the changes made to the ETH0 interface and return to using
 #### Remote SSH connection
 Now that you have a static IP, we can switch over to an SSH connection. Using an SSH connection will be faster, more secure and allows for file transfer to and from the board. This will be useful if you want to change the plot settings (remove one of the axes, add small data points, change the curve, etc.). This will also allow you to change the project files on the board after running the sample application.
 
-The guide assumes that so far you have been using a Serial connection to the board to perform the initial setup. To connect to the board use a SSH client like Putty or TeraTerm you will have to setup a password for the root account. This can be changed by running the `passwd` command.
-
-It is possible to connect without using a password too, although not really recommended, by changing the following line in `/etc/shadow`:
-
-```
-root::17247:0:99999:7:::
-```
-
-to
-
-```
-root:U6aMy0wojraho:17247:0:99999:7:::
-```
-
-This changes the root account password from null to an empty password and will allow SSH connections without any other hassle (like public keys).
+The guide assumes that so far you have been using a Serial connection to the board to perform the initial setup. To connect to the board via SSH you will need a client like Putty or TeraTerm. You should also setup a password for the root account, by running the `passwd` command.
 
 ## Step 2: Clone the GitHub/* Repository
 
@@ -272,6 +258,12 @@ npm start
 
 The Plotly\* graphing library is used to visualize the data in the form of a real-time plot. The page is accessible from almost any browser/device combo.
 
+To view the graph, use any device connected to the same network as the DE10-Nano board, open a browser, and go to:
+
+```
+http://<device_ip>:3000
+```
+
 There are a few key components to this application that allow reading data from the accelerometer and pushing it to the client.
 
 On the server side, you'll need to load the UPM library for the ADXL345 and read the g-force values. This is reflected by the following code:
@@ -329,18 +321,15 @@ connection.onmessage = function (message) {
 
 The rest of the client side code defines the style of the graph according to the Plotly API.
 
-To view the graph, use any device connected to the same network as the DE10-Nano board, open a browser, and go to:
-
-```
-http://<device_ip>:3000
-```
-
 Keep in mind that the current setup will refresh the data approximately 10 times a second. Feel free to try different values to show more or less data.
 
 ## Step 7: Observe the Types of Forces Acting on the Board
 
 [//]: # (Tudor to add board + axes overlay -- give Tudor spcm graphics folder URL)
 [//]: # (Do we/can we calibrate this thing?)
+
+![Sample data](images/adxl345-fast30.gif)
+![Accelerometer Axes](images/45degree-axes.jpg)
 
 ### Static Forces
 * Gravity
