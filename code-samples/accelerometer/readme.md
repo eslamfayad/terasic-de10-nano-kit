@@ -29,8 +29,8 @@ In this tutorial you will:
 
 ### Software
 
-* PuTTY
-* Tera Term
+* [PuTTY](www.putty.org/)
+* [Tera Term](https://ttssh2.osdn.jp/index.html.en)
 
 To connect to the board via serial/SSH you will need a client like Putty or TeraTerm.
 
@@ -57,9 +57,11 @@ Node.js\*
 ## Accelerometer Theory
 
 ### Speeding Up, Slowing Down, Changing Direction
-How does your smart phone know which way is up? And how does it know to change its orientation from portrait to landscape when you rotate your device by 90 degrees clockwise? These motion smart features come courtesy of an accelerometer. An accelerometer is a sensor that measures acceleration (relative to its own frame of reference). You may remember from physics what when velocity—speed with direction—is changing, acceleration is happening. Acceleration includes speeding up, slowing down or changing direction and by detecting changes in orientation (along the x, y, and z axes) an accelerometer...
+How does your smart phone know which way is up? And how does it know to change its orientation from portrait to landscape when you rotate your device by 90 degrees clockwise? These motion smart features come courtesy of an accelerometer. An accelerometer is a sensor that measures acceleration (relative to its own frame of reference). You may remember from physics what when velocity—speed with direction—is changing, acceleration is happening. Acceleration includes speeding up, slowing down or changing direction and by measuring acceleration (g-force) along the x, y, and z axes an accelerometer know up from down.
 
 There are two ways to use an accelerometer: acceleration and tilt. Here we use a 3-axis accelerometer to measure acceleration along all 3 axes (x, y, and z).
+
+**note**: The acceleration due to gravity at the Earth's surface is one g.
 
 ### Communicating with the Accelerometer
 
@@ -352,7 +354,8 @@ You can observe the force of gravity acting on the board when board is resting o
 ### Dynamic Forces
 
 1. Movement
-* Motion along the x (blue), y (orange) and z(green) axes.
+Observe motion along the x (blue), y (orange) and z(green) axes by:
+*Moving the board up and down horizontally, vertically, and at an angle.
 
 2. Vibration
 
