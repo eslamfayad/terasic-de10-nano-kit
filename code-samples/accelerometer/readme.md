@@ -177,6 +177,8 @@ When using the sample code from this repository, Express, Websocket and Plotly w
 
 ## Step 4: Unbind the ADXL345\* Driver
 
+By default Linux/* is bound (i.e., "owns") this accelerometer device. Here, we'll need to "unbind" the device from Linux in order to use it for our program. Wrestle that control away from Linux.
+
 By default the adxl34x driver will bind with device 0-0053, you can see that in the directory listing below:
 
 ```
@@ -211,7 +213,8 @@ root@de10-nano:~# ls /sys/bus/i2c/drivers/adxl34x
 0-0053  bind    uevent  unbind 
 ```
 
-**Note**: Rebinding the driver is required in case you want to run other accelerometer samples (hint: another accelerometer sample for tilt is included on the microSD card image).
+**Note**: Rebinding the driver is required in case you want to run other accelerometer samples (hint: there maybe an Easter egg 
+ such as another accelerometer sample for tilt included on the microSD card image -- go hunt for it!).
 
 ## Step 5: Setup an Express.js Webserver
 
@@ -244,6 +247,8 @@ var connection = new WebSocket('ws://192.168.1.10:3001'); // Change to match you
 
 You can use the built in `vi` editor to make the change. You are now ready to start the server.
 
+[//]: # (note that there is another editor in the event that you hate/disklike vi. Dalon knows that other editor option. Ask him. It's a GUI based editor that can be used.)
+
 Starting Express\* is as simple as typing the following command:
 
 ```
@@ -251,7 +256,6 @@ npm start
 ```
 
 ## Step 6: Generate a Real-time Plot Using Plotly\*
-
 
 The Plotly\* graphing library is used to visualize the data in the form of a real-time plot. The page is accessible from almost any browser/device combo.
 
@@ -338,6 +342,9 @@ Keep in mind that the current setup will refresh the data approximately 10 times
 * Motion along the x, y, and z axis
 
 2. Vibration
+
+[//]: # (Bob's idea is to have something vibrate the baord -- a constant vibration preferred -- and then feed into the FFT and it converts that time domain into frequency. Pure software project. No hardware. Future item.)
+
 The sensitivity of accelerometers... by gently tapping the board... we can observe tiny minute changes in acceleration...
 
 * Tapping the board
