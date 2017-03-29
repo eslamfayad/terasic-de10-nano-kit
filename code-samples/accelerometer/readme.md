@@ -1,4 +1,4 @@
-# Interfacing with the Terasic DE10-Nano\* Board's Built-in Accelerometer
+# Capture and Plot Accelerometer Data
 
 [//]: # (This syntax works like a comment, and won't appear in any output.)
 
@@ -108,6 +108,10 @@ First connect the DE10-Nano board to the internet and get a static IP.
 
 #### Get a static IP
 
+Serial connection using terminal.
+[//]: # (Tudor, we open up a terminal window or shell first?)
+
+
 Run the following command to force a static IP on the eth0 interface with connman:
 
 `connmanctl config ethernet_000000000000_cable --ipv4 manual <device_ip> <subnet_mask> <gateway_ip>`
@@ -168,6 +172,8 @@ The source code files for the accelerometer tutorial can be found under `terasic
 
 When using the sample code from this repository, Express, Websocket and Plotly will get installed by running
 `npm install` in the application folder.
+
+[//]: # (Make a note that these packages come pre-installed on the default sd card image but... you can okpg technologies into your development enviroment. You can learn how to use opkg here!)
 
 ## Step 4: Unbind the ADXL345\* Driver
 
