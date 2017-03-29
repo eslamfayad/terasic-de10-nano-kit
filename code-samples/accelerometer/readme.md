@@ -345,7 +345,7 @@ Keep in mind that the current setup will refresh the data approximately 10 times
 
 2. Vibration
 
-[//]: # (Bob's idea is to have something vibrate the baord -- a constant vibration preferred -- and then feed into the FFT and it converts that time domain into frequency. Pure software project. No hardware. Future item.)
+[//]: # (Future item. Bob's idea is to have something vibrate the board -- a constant vibration preferred -- and then feed into the FFT and it converts that time domain into frequency. Pure software project. No hardware.)
 
 The sensitivity of accelerometers... by gently tapping the board... we can observe tiny minute changes in acceleration...
 
