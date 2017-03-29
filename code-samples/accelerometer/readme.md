@@ -78,9 +78,9 @@ Follow along with the steps below to get data from the DE10-Nano's built-in acce
 
 3. [Install Express\*, Websocket\* and Plotly\*](readme.md#step-3-install-express-websocket-and-plotly)
 
-4. [Setup an Express.js Web server](readme.md#step-5-setup-an-expressjs-webserver)
+4. [Unbind the ADXL345\* Driver](readme.md#step-4-unbind-the-adxl345-driver)
 
-5. [Unbind the ADXL345\* Driver](readme.md#step-4-unbind-the-adxl345-driver)
+5. [Setup an Express.js Web server](readme.md#step-5-setup-an-expressjs-webserver) 
 
 6. [Generate a real-time plot using Plotly\*](readme.md#step-6-generate-a-real-time-plot-using-plotly)
 
@@ -115,8 +115,11 @@ First connect the DE10-Nano board to the internet and get a static IP.
 
 The tutorial assumes that you'll use a serial connection to the board to perform the initial setup. You should also set a password for the root account, by running the `passwd` command.
 
+**Note**: We assume you know how to set up a serial terminal on a system. For a reference on how to set up a serial terminal, check out the page [here](https://software.intel.com/en-us/setting-up-serial-terminal-intel-edison-board).
+
 [//]: # (Tudor, we open up a terminal window or shell first?)
 
+Start your preferred terminal application to establish a connection to the DE10-nano.
 
 Run the following command to force a static IP on the eth0 interface with connman:
 
