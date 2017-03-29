@@ -40,8 +40,6 @@ MRAA is an I/O library (abstraction layer) that creates a common interface acros
 
 * UPM
 
-[//]: # (EG changed below description. Check with Tudor for accuracy.)
-
 UPM is a sensor library that provides software drivers for a wide variety of commonly used sensors including the DE10-nano's on-board accelerometer. These software drivers interact with the underlying hardware platform through calls to MRAA APIs. In this tutorial, the UPM library is used to read data from the board's built-in 3-axis digital accelerometer, the ADXL345 from Analog Devices.
 
 **Note**: MRAA and UPM come pre-installed on the default DE10-Nano microSD card image.
@@ -109,6 +107,7 @@ First connect the DE10-Nano board to the internet and get a static IP.
 #### Get a static IP
 
 Serial connection using terminal.
+
 [//]: # (Tudor, we open up a terminal window or shell first?)
 
 
