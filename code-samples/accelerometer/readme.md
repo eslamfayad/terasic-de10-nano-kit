@@ -64,23 +64,23 @@ Here, we interface with the board's built-in digital accelerometer using an I2C\
 ## Tutorial Steps
 Follow along with the steps below to get data from the DE10-Nano's built-in accelerometer and plot that data in graphing software.
 
-1. Prepare the DE10-Nano development board to host the accelerometer application
+1. [Prepare the DE10-Nano development board to host the accelerometer application](readme.md#step-1-prepare-your-de10-nano)
 
 [//]: # (2. Build and install the MRAA and UPM libraries on the de10-nano board removed -- Dalon plans to release new versions semi-annually)
 
 [//]: # (java bindings are not enabled for the pre-installed packages. And the reason, the version of Angstrom we are using... the java packages don't compile)
 
-2. Clone the GitHub\* repository 
+2. [Clone the GitHub\* repository](readme.md#step-2-clone-the-github-repository)
 
-3. Install Express\*, Websocket\* and Plotly\*
+3. [Install Express\*, Websocket\* and Plotly\*](readme.md#step-3-install-express-websocket-and-plotly)
 
-4. Setup an Express.js Web server
+4. [Setup an Express.js Web server](readme.md#step-4-unbind-the-adxl345-driver)
 
-5. Unbind the ADXL345\* Driver
+5. [Unbind the ADXL345\* Driver](readme.md#step-5-setup-an-expressjs-webserver)
 
-6. Generate a real-time plot using Plotly\*
+6. [Generate a real-time plot using Plotly\*](readme.md#step-6-generate-a-real-time-plot-using-plotly)
 
-7. Observe the types of forces acting on the board
+7. [Observe the types of forces acting on the board](readme.md#step-7-observe-the-types-of-forces-acting-on-the-board)
 
 [//]: # (Dalon installed node.js and npm on the microSD card)
 
@@ -158,8 +158,17 @@ The source code files for the accelerometer tutorial can be found under `terasic
 
 ## Step 3: Install Express\*, Websocket\* and Plotly\*
 
-When using the sample code from this repository, Express, Websocket and Plotly will get installed by running
-`npm install` in the application folder.
+Enter the application directory by typing:
+
+```
+cd terasic-de10-nano-kit/code-samples/accelerometer/de10-adxl345
+```
+
+When using the sample code from this repository, Express, Websocket and Plotly will get installed by running:
+
+```
+npm install
+```
 
 [//]: # (Make a note that these packages come pre-installed on the default sd card image but... you can okpg technologies into your development enviroment. You can learn how to use opkg here!)
 
