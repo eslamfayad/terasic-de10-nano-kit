@@ -5,6 +5,9 @@
 ## Purpose and Overview
 Data from the DE10-Nano's built-in 3-axis accelerometer is measured on ALL 3 axes to show when the board is in motion. The raw output of the accelerometer is converted to g-force values by a sensor library and then sent to graphing software for data visualization and interpretation.
 
+[//]: # (Remove learn how to use opkg item okay?)
+
+
 In this tutorial you will:
 * Interface with the board's built-in digital accelerometer using an I2C\* interface.
 * Use Intel’s I/O and sensor libraries (MRAA and UPM) to get data from the accelerometer.
@@ -212,8 +215,7 @@ root@de10-nano:~# ls /sys/bus/i2c/drivers/adxl34x
 0-0053  bind    uevent  unbind 
 ```
 
-**Note**: Rebinding the driver is required in case you want to run other accelerometer samples (hint: there maybe an Easter egg 
- such as another accelerometer sample for tilt included on the microSD card image -- go hunt for it!).
+**Note**: Rebinding the driver is required in case you want to run other accelerometer samples (hint: there maybe an accelerometer Easter egg hiding on the microSD card image—go hunt for it!).
 
 ## Step 5: Setup an Express.js Webserver
 
