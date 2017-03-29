@@ -215,7 +215,7 @@ root@de10-nano:~# ls /sys/bus/i2c/drivers/adxl34x
 0-0053  bind    uevent  unbind 
 ```
 
-**Note**: Rebinding the driver is required in case you want to run other accelerometer samples (hint: there maybe an accelerometer Easter egg hiding on the microSD card image—go hunt for it!).
+**Note**: Rebinding the driver is required in case you want to run other accelerometer samples (Hint: There maybe an accelerometer Easter egg hiding on the microSD card image... Go hunt for it!).
 
 ## Step 5: Setup an Express.js Webserver
 
