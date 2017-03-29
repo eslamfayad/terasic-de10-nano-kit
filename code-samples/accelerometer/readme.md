@@ -349,18 +349,24 @@ Keep in mind that the current setup will refresh the data approximately 10 times
 
 ### Static Forces
 * Gravity
-You can observe the force of gravity acting on the board when board is resting on its rubber feet. The green line (z-axis) should show a constant force of 1g. In fact, the force of gravity is always shown on the graph: 1g or 9.8 m/s^2.
+
+You can observe the force of gravity acting on the board when board is resting on its rubber feet. 
+
+The green line (z-axis) should show a constant force of 1g (or 9.8 m/s^2). And, in fact, the force of gravity is always shown on the graph!
 
 ### Dynamic Forces
 
 1. Movement
+
 Observe motion along the x (blue), y (orange) and z(green) axes by:
-*Moving the board up and down horizontally, vertically, and at an angle.
+
+* Moving the board up and down horizontally, vertically, and at a 45 degree angle.
 
 2. Vibration
 
 [//]: # (Future item. Bob's idea is to have something vibrate the board -- a constant vibration preferred -- and then feed into the FFT and it converts that time domain into frequency. Pure software project. No hardware.)
 Observe what happens when you:
+
 * Lightly tap the board
 * Drum on on the table
 * Place the board on or near something with a constant vibration (e.g., fan motor)
