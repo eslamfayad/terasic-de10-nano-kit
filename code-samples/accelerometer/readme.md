@@ -74,9 +74,9 @@ Follow along with the steps below to get data from the DE10-Nano's built-in acce
 
 3. [Install Express\*, Websocket\* and Plotly\*](readme.md#step-3-install-express-websocket-and-plotly)
 
-4. [Setup an Express.js Web server](readme.md#step-4-unbind-the-adxl345-driver)
+4. [Setup an Express.js Web server](readme.md#step-5-setup-an-expressjs-webserver)
 
-5. [Unbind the ADXL345\* Driver](readme.md#step-5-setup-an-expressjs-webserver)
+5. [Unbind the ADXL345\* Driver](readme.md#step-4-unbind-the-adxl345-driver)
 
 6. [Generate a real-time plot using Plotly\*](readme.md#step-6-generate-a-real-time-plot-using-plotly)
 
