@@ -11,7 +11,6 @@ Data from the DE10-Nano's built-in 3-axis accelerometer is measured on ALL 3 axe
 In this tutorial you will:
 * Interface with the board's built-in digital accelerometer using an I2C\* interface.
 * Use Intel’s I/O and sensor libraries (MRAA and UPM) to get data from the accelerometer.
-* Learn how to use opkg to install additional software libraries and tools.
 * Monitor and observe acceleration data for small vibration and movement along the x, y, z axes.
 * Translate the acceleration data into +/- g-force values to demonstrate the motion of the DE10-Nano board.
 * Show the accelerometer data using different open-source technologies: 
@@ -29,6 +28,11 @@ In this tutorial you will:
 * Router
 
 ### Software
+
+* PuTTY
+* Tera Term
+
+To connect to the board via serial/SSH you will need a client like Putty or TeraTerm.
 
 [//]: # (For getting a tilt/orientation vector you would need to do a bit of trigonometry on the accelerometer data and that is not shown here.)
 
@@ -109,7 +113,7 @@ First connect the DE10-Nano board to the internet and get a static IP.
 
 #### Get a static IP
 
-Serial connection using terminal.
+The tutorial assumes that you'll use a serial connection to the board to perform the initial setup. You should also set a password for the root account, by running the `passwd` command.
 
 [//]: # (Tudor, we open up a terminal window or shell first?)
 
@@ -137,8 +141,6 @@ If you need to revert the changes made to the ETH0 interface and return to using
 
 #### Remote SSH connection
 Now that you have a static IP, we can switch over to an SSH connection. Using an SSH connection will be faster, more secure and allows for file transfer to and from the board. This will be useful if you want to change the plot settings (remove one of the axes, add small data points, change the curve, etc.). This will also allow you to change the project files on the board after running the sample application.
-
-The guide assumes that so far you have been using a Serial connection to the board to perform the initial setup. To connect to the board via SSH you will need a client like Putty or TeraTerm. You should also setup a password for the root account, by running the `passwd` command.
 
 ## Step 2: Clone the GitHub/* Repository
 
