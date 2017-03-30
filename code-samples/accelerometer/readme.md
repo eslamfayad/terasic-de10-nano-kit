@@ -57,7 +57,7 @@ Node.js\*
 ## Accelerometer Theory
 
 ### Speeding Up, Slowing Down, Changing Direction
-How does your smart phone know which way is up? And how does it know to change its orientation from portrait to landscape when you rotate your device by 90 degrees clockwise? These motion smart features come courtesy of an accelerometer. An accelerometer is a sensor that measures acceleration (relative to its own frame of reference). You may remember from physics what when velocity—speed with direction—is changing, acceleration is happening. Acceleration includes speeding up, slowing down or changing direction and by measuring acceleration (g-force) along the x, y, and z axes an accelerometer know up from down.
+How does your smart phone know which way is up? And how does it know to change its orientation from portrait to landscape when you rotate your device by 90 degrees clockwise? These motion smart features come courtesy of an accelerometer. An accelerometer is a sensor that measures acceleration (relative to its own frame of reference). You may remember from physics what when velocity—speed with direction—is changing, acceleration is happening. Acceleration includes speeding up, slowing down or changing direction and by measuring acceleration (g-force) along the x, y, and z axes an accelerometer knows up from down.
 
 There are two ways to use an accelerometer: acceleration and tilt. Here we use a 3-axis accelerometer to measure acceleration along all 3 axes (x, y, and z).
 
