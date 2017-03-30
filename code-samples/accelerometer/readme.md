@@ -96,14 +96,16 @@ Follow along with the steps below to get data from the Terasic DE10-Nano's built
 
 ## Step 1: Prepare your Terasic DE10-Nano
 
-#### Checkpoint: Have you gone through the initial assembly and setup of the Terasic DE10-Nano board?
+**Checkpoint**: Have you gone through the initial assembly and setup of the Terasic DE10-Nano board?
+
 At this point, we assume you've already gone through the initial assembly and setup for the Terasic DE10-Nano kit. The microSD card that came with the Terasic DE10-Nano kit should be inserted into the board's microSD card slot and your board should be powered on. Please go through the assembly and setup process first!
 
 For instructions on board assembly and setup, check out the [Terasic DE10-Nano Setup](https://software.intel.com/en-us/de10-nano-setup) from the Terasic DE10-Nano Get Started Guide.
 
-### Connect the Board to the Internet
+### Connect to the Board
+This tutorial assumes that you'll use a serial connection to the board to perform the initial setup. You should also set a password for the root account, by running the `passwd` command.
 
-First connect the Terasic DE10-Nano board to the internet and get a static IP.
+Here, you'll connect the board to the internet, get a static IP and then switch over to an SSH connection.
 
 1. Run an Ethernet cable from the Terasic DE10-Nano board to a router.
 
@@ -111,15 +113,7 @@ There are two different network interfaces on the Terasic DE10-Nano board: 1) Et
 
 **Note**: Newer versions of the Terasic DE10-Nano image will contain drivers for most USB Wi-Fi dongles. Unfortunately this exercise does not cover setting up a wireless connection.
 
-#### Get a static IP
-
-This tutorial assumes that you'll use a serial connection to the board to perform the initial setup. You should also set a password for the root account, by running the `passwd` command.
-
-**Note**: We assume you know how to set up a serial terminal on a system. For a reference on how to set up a serial terminal, check out the page [here](https://software.intel.com/en-us/setting-up-serial-terminal-intel-edison-board).
-
-[//]: # (Tudor, we open up a terminal window or shell first?)
-
-##### Start Your Terminal Application
+2. Get a static IP
 
 Start your preferred terminal application (PuTTY or Tera Term) to establish a connection to the Terasic DE10-nano board.
 
@@ -133,7 +127,12 @@ Run the following command to force a static IP on the eth0 interface with connma
 | <subnet_mask> | bit mask to determine what subnet the IP address belongs to | 255.255.255.0 |
 | <gateway_ip> | gateway/router IP address | 192.168.1.1 | 
 
+**Note**: We assume you know how to set up a serial terminal on a system. For a reference on how to set up a serial terminal, check out the page [here](https://software.intel.com/en-us/setting-up-serial-terminal-intel-edison-board).
 
+3. Switch to a Remote SSH connection
+Now that you have a static IP, we can switch over to an SSH connection. Using an SSH connection will be faster, more secure and allows for file transfer to and from the board. This will be useful if you want to change the plot settings (remove one of the axes, add small data points, change the curve, etc.). This will also allow you to change the project files on the board after running the sample application.
+
+#### Dynamic Host Configuration Protocol (DHCP)
 By default, the Ethernet interface on the board is set to Dynamic Host Configuration Protocol (DHCP) mode, thus it will automatically ask for an IP address from the router that the board was plugged into.
 
 The process of connecting to the Terasic DE10-Nano and hosting the graphing webpage is made a lot easier by configuring the router to assign a static IP to the board (based on the MAC address of the Ethernet interface).
@@ -144,8 +143,6 @@ Most modern routers are able to do this even with DHCP assignment turned on. By 
 If you need to revert the changes made to the ETH0 interface and return to using DHCP mode, type the command:
 `connmanctl config ethernet_000000000000_cable --ipv4 dhcp`
 
-#### Remote SSH connection
-Now that you have a static IP, we can switch over to an SSH connection. Using an SSH connection will be faster, more secure and allows for file transfer to and from the board. This will be useful if you want to change the plot settings (remove one of the axes, add small data points, change the curve, etc.). This will also allow you to change the project files on the board after running the sample application.
 
 ## Step 2: Clone the GitHub/* Repository
 
