@@ -348,7 +348,7 @@ Keep in mind that the current setup will refresh the data approximately 10 times
 ![Accelerometer Axes](images/45degree-axes.jpg)
 
 ### Static Forces
-* Gravity
+**Force of Gravity**
 
 You can observe the force of gravity acting on the board when board is resting on its rubber feet. 
 
@@ -356,13 +356,14 @@ The green line (z-axis) should show a constant force of 1g (or 9.8 m/s^2). And, 
 
 ### Dynamic Forces
 
-1. Movement
+**Movement**
 
-Observe motion along the x (blue), y (orange) and z(green) axes by:
+Observe motion along the x (blue), y (orange) and z(green) axes by moving the board:
+* Up and down
+* Side to side
+* At a 45 degree angle
 
-* Moving the board up and down horizontally, vertically, and at a 45 degree angle.
-
-2. Vibration
+**Vibration**
 
 [//]: # (Future item. Bob's idea is to have something vibrate the board -- a constant vibration preferred -- and then feed into the FFT and it converts that time domain into frequency. Pure software project. No hardware.)
 Observe what happens when you:
