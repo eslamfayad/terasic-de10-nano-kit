@@ -397,3 +397,10 @@ including several rated for industrial use are also available. For a full list o
 Some nice Plotly examples on how to extend graphs with new data:
  * http://codepen.io/plotly/pen/LGEyyY
  * http://codepen.io/etpinard/pen/qZzyXp
+ 
+ ## Additional Resources
+* [Discover the Terasic DE10-Nano Kit](https://signin.intel.com/logout?target=https://software.intel.com/en-us/iot/hardware/fpga/de10-nano)
+* [Terasic DE10-Nano Get Started Guide](https://software.intel.com/en-us/terasic-de10-nano-get-started-guide)
+* [Project: My First FPGA](https://software.intel.com/en-us/articles/my-first-fpga)
+* [Learn more about Intel FPGAs](https://software.intel.com/en-us/iot/hardware/fpga/)
+
