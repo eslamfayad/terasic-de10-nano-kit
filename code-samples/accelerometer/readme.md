@@ -115,11 +115,13 @@ First connect the DE10-Nano board to the internet and get a static IP.
 
 #### Get a static IP
 
-The tutorial assumes that you'll use a serial connection to the board to perform the initial setup. You should also set a password for the root account, by running the `passwd` command.
+This tutorial assumes that you'll use a serial connection to the board to perform the initial setup. You should also set a password for the root account, by running the `passwd` command.
 
 **Note**: We assume you know how to set up a serial terminal on a system. For a reference on how to set up a serial terminal, check out the page [here](https://software.intel.com/en-us/setting-up-serial-terminal-intel-edison-board).
 
 [//]: # (Tudor, we open up a terminal window or shell first?)
+
+##### Start Your Terminal Application
 
 Start your preferred terminal application to establish a connection to the DE10-nano.
 
@@ -358,7 +360,7 @@ The green line (z-axis) should show a constant force of 1g (or 9.8 m/s^2). And, 
 
 **Movement**
 
-Observe motion along the x (blue), y (orange) and z(green) axes by moving the board:
+Observe motion along the x (blue), y (orange) and z (green) axes by moving the board:
 * Up and down and side to side
 * Figure eight
 * Seesaw motion
