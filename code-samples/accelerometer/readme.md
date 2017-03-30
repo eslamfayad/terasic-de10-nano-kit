@@ -3,16 +3,16 @@
 [//]: # (This syntax works like a comment, and won't appear in any output.)
 
 ## Purpose and Overview
-Data from the Terasic DE10-Nano's\* built-in 3-axis accelerometer is measured on ALL 3 axes to show when the board is in motion. The raw output of the accelerometer is converted to g-force values by a sensor library and then sent to graphing software for data visualization and interpretation.
+Data from the Terasic DE10-Nano's built-in 3-axis accelerometer is measured on ALL 3 axes to show when the board is in motion. The raw output of the accelerometer is converted to g-force values by a sensor library and then sent to graphing software for data visualization and interpretation.
 
 [//]: # (Remove learn how to use opkg item okay?)
 
 
 In this tutorial you will:
-* Interface with the board's built-in digital accelerometer using an I2C\* interface.
-* Use Intel’s I/O and sensor libraries (MRAA and UPM) to get data from the accelerometer.
+* Interface with the board's built-in digital accelerometer using an I2C interface.
+* Use Intel® I/O and sensor libraries (MRAA and UPM) to get data from the accelerometer.
 * Monitor and observe acceleration data for small vibration and movement along the x, y, z axes.
-* Translate the acceleration data into +/- g-force values to demonstrate the motion of the Terasic DE10-Nano\* board.
+* Translate the acceleration data into +/- g-force values to demonstrate the motion of the Terasic DE10-Nano board.
 * Show the accelerometer data using different open-source technologies: 
   * Express\* (web server)
   * Plotly\* (graphing library)
@@ -47,9 +47,9 @@ MRAA is an I/O library (abstraction layer) that creates a common interface acros
 
 * UPM
 
-UPM is a sensor library that provides software drivers for a wide variety of commonly used sensors including the DE10-nano's on-board accelerometer. These software drivers interact with the underlying hardware platform through calls to MRAA APIs. In this tutorial, the UPM library is used to read data from the board's built-in 3-axis digital accelerometer, the ADXL345 from Analog Devices\*.
+UPM is a sensor library that provides software drivers for a wide variety of commonly used sensors including the Terasic DE10-nano's on-board accelerometer. These software drivers interact with the underlying hardware platform through calls to MRAA APIs. In this tutorial, the UPM library is used to read data from the board's built-in 3-axis digital accelerometer, the ADXL345 from Analog Devices\*.
 
-**Note**: MRAA and UPM come pre-installed on the default DE10-Nano microSD card image.
+**Note**: MRAA and UPM come pre-installed on the default Terasic DE10-Nano microSD card image.
 
 #### Programming Language
 Node.js\*
@@ -69,14 +69,14 @@ Here we use a 3-axis accelerometer to measure acceleration along all 3 axes (x, 
 
 ### Communicating with the Accelerometer
 
-Here, we interface with the board's built-in digital accelerometer using an I2C\* interface. The I2C bus is physically wired up to the ARM\* processor on the SoC. 
+Here, we interface with the board's built-in digital accelerometer using an I2C interface. The I2C bus is physically wired up to the ARM\* processor on the SoC. 
 
 ## Tutorial Steps
-Follow along with the steps below to get data from the DE10-Nano's built-in accelerometer and plot that data in graphing software.
+Follow along with the steps below to get data from the Terasic DE10-Nano's built-in accelerometer and plot that data in graphing software.
 
-1. [Prepare the DE10-Nano development board to host the accelerometer application](readme.md#step-1-prepare-your-de10-nano)
+1. [Prepare the Terasic DE10-Nano development board to host the accelerometer application](readme.md#step-1-prepare-your-de10-nano)
 
-[//]: # (2. Build and install the MRAA and UPM libraries on the de10-nano board removed -- Dalon plans to release new versions semi-annually)
+[//]: # (2. Build and install the MRAA and UPM libraries on the Terasic de10-nano board removed -- Dalon plans to release new versions semi-annually)
 
 [//]: # (java bindings are not enabled for the pre-installed packages. And the reason, the version of Angstrom we are using... the java packages don't compile)
 
@@ -94,22 +94,22 @@ Follow along with the steps below to get data from the DE10-Nano's built-in acce
 
 [//]: # (Dalon installed node.js and npm on the microSD card)
 
-## Step 1: Prepare your DE10-Nano
+## Step 1: Prepare your Terasic DE10-Nano
 
-#### Checkpoint: Have you gone through the initial assembly and setup of the DE10-Nano board?
-At this point, we assume you've already gone through the initial assembly and setup for the DE10-Nano kit. The microSD card that came with the Terasic\* DE10-Nano kit should be inserted into the board's microSD card slot and your board should be powered on. Please go through the assembly and setup process first!
+#### Checkpoint: Have you gone through the initial assembly and setup of the Terasic DE10-Nano board?
+At this point, we assume you've already gone through the initial assembly and setup for the Terasic DE10-Nano kit. The microSD card that came with the Terasic DE10-Nano kit should be inserted into the board's microSD card slot and your board should be powered on. Please go through the assembly and setup process first!
 
-For instructions on board assembly and setup, check out the [DE10-Nano Setup](https://software.intel.com/en-us/de10-nano-setup) from the DE10-Nano Get Started Guide.
+For instructions on board assembly and setup, check out the [Terasic DE10-Nano Setup](https://software.intel.com/en-us/de10-nano-setup) from the Terasic DE10-Nano Get Started Guide.
 
 ### Connect the Board to the Internet
 
-First connect the DE10-Nano board to the internet and get a static IP.
+First connect the Terasic DE10-Nano board to the internet and get a static IP.
 
-1. Run an Ethernet cable from the DE10-Nano board to a router.
+1. Run an Ethernet cable from the Terasic DE10-Nano board to a router.
 
-There are two different network interfaces on the DE10-Nano board: 1) Ethernet interface (ETH0) and 2) USB RNDIS (Ethernet over USB, interface USB0). In this exercise we use the Ethernet interface.
+There are two different network interfaces on the Terasic DE10-Nano board: 1) Ethernet interface (ETH0) and 2) USB RNDIS (Ethernet over USB, interface USB0). In this exercise we use the Ethernet interface.
 
-**Note**: Newer versions of the DE10-Nano image will contain drivers for most USB Wi-Fi dongles. Unfortunately this exercise does not cover setting up a wireless connection.
+**Note**: Newer versions of the Terasic DE10-Nano image will contain drivers for most USB Wi-Fi dongles. Unfortunately this exercise does not cover setting up a wireless connection.
 
 #### Get a static IP
 
@@ -121,7 +121,7 @@ This tutorial assumes that you'll use a serial connection to the board to perfor
 
 ##### Start Your Terminal Application
 
-Start your preferred terminal application (PuTTY or Tera Term) to establish a connection to the DE10-nano board.
+Start your preferred terminal application (PuTTY or Tera Term) to establish a connection to the Terasic DE10-nano board.
 
 Run the following command to force a static IP on the eth0 interface with connman:
 
@@ -129,14 +129,14 @@ Run the following command to force a static IP on the eth0 interface with connma
  
 | Variable | Description | Example |
 | --- | --- | --- |
-| <device_ip> | the IP address you want to assign to the DE10-Nano | 192.168.1.10 |
+| <device_ip> | the IP address you want to assign to the Terasic DE10-Nano | 192.168.1.10 |
 | <subnet_mask> | bit mask to determine what subnet the IP address belongs to | 255.255.255.0 |
 | <gateway_ip> | gateway/router IP address | 192.168.1.1 | 
 
 
 By default, the Ethernet interface on the board is set to Dynamic Host Configuration Protocol (DHCP) mode, thus it will automatically ask for an IP address from the router that the board was plugged into.
 
-The process of connecting to the DE10-Nano and hosting the graphing webpage is made a lot easier by configuring the router to assign a static IP to the board (based on the MAC address of the Ethernet interface).
+The process of connecting to the Terasic DE10-Nano and hosting the graphing webpage is made a lot easier by configuring the router to assign a static IP to the board (based on the MAC address of the Ethernet interface).
 
 Most modern routers are able to do this even with DHCP assignment turned on. By setting a static IP you won't have to edit the client configuration every time you are assigned a new IP address by the router.
 
@@ -153,7 +153,7 @@ Now that you have a static IP, we can switch over to an SSH connection. Using an
 
 [//]: # (Plotly graph viewed on the host PC or your laptop)
 
-Cloning the Github repository which includes the source code for this sample is a straightforward process. The Git client is part of the DE10-Nano image.
+Cloning the Github repository which includes the source code for this sample is a straightforward process. The Git client is part of the Terasic DE10-Nano image.
 To clone the repository type the following command in your SSH session:
 
 ```
@@ -254,7 +254,7 @@ echo "export NODE_PATH=/usr/lib/node_modules" > ~/.profile
 Server side code is in the `app.js` file. This file was generated using an Express.js template and then extended to handle a WebSockets connection. More information on both
 concepts can be found under references. The server will also send accelerometer data periodically using the UPM ADXL345 library, as explained in the next section.
 
-Client side code can be found in the `public/js/index.js` file. On the client side, you will need to set the IP address of the DE10-Nano board:
+Client side code can be found in the `public/js/index.js` file. On the client side, you will need to set the IP address of the Terasic DE10-Nano board:
 
 ```js
 var connection = new WebSocket('ws://192.168.1.10:3001'); // Change to match your own DE10-Nano IP
@@ -274,7 +274,7 @@ npm start
 
 The Plotly\* graphing library is used to visualize the data in the form of a real-time plot. The page is accessible from almost any browser/device combo.
 
-To view the graph, use any device connected to the same network as the DE10-Nano board, open a browser, and go to:
+To view the graph, use any device connected to the same network as the Terasic DE10-Nano board, open a browser, and go to:
 
 ```
 http://<device_ip>:3000
@@ -378,7 +378,7 @@ On a PC or laptop, Plotly makes use of hardware acceleration (via webGL) for ren
 graphs. Unfortunately, this feature is unavailable on mobile browsers (e.g. tablets, smartphones). This means the plotting rate is directly impacted and limited to only a few updates per second
 (1 to 4) for these devices. The good news is that the amount of data you can send over WebSockets is not affected.
 
-A natural optimization would be to collect the data points in buffers on the client side, while continuing to send them at a high rate from the DE10-Nano. You can then update the graph with
+A natural optimization would be to collect the data points in buffers on the client side, while continuing to send them at a high rate from the Terasic DE10-Nano. You can then update the graph with
 several values at once and still keep the graph responsive even on mobile devices.
 
 ## Conclusion
@@ -402,5 +402,5 @@ Some nice Plotly examples on how to extend graphs with new data:
 * [Discover the Terasic DE10-Nano Kit](https://signin.intel.com/logout?target=https://software.intel.com/en-us/iot/hardware/fpga/de10-nano)
 * [Terasic DE10-Nano Get Started Guide](https://software.intel.com/en-us/terasic-de10-nano-get-started-guide)
 * [Project: My First FPGA](https://software.intel.com/en-us/articles/my-first-fpga)
-* [Learn more about Intel FPGAs](https://software.intel.com/en-us/iot/hardware/fpga/)
+* [Learn more about Intel® FPGAs](https://software.intel.com/en-us/iot/hardware/fpga/)
 
