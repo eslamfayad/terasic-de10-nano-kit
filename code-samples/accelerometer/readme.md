@@ -125,11 +125,12 @@ Run the following command to force a static IP on the eth0 interface with connma
 | --- | --- | --- |
 | <device_ip> | the IP address you want to assign to the Terasic DE10-Nano | 192.168.1.10 |
 | <subnet_mask> | bit mask to determine what subnet the IP address belongs to | 255.255.255.0 |
-| <gateway_ip> | gateway/router IP address | 192.168.1.1 | 
+| <gateway_ip> | gateway/router IP address | 192.168.1.1 |
 
 **Note**: We assume you know how to set up a serial terminal on a system. For a reference on how to set up a serial terminal, check out the page [here](https://software.intel.com/en-us/setting-up-serial-terminal-intel-edison-board).
 
 3. Switch to a Remote SSH connection
+
 Now that you have a static IP, we can switch over to an SSH connection. Using an SSH connection will be faster, more secure and allows for file transfer to and from the board. This will be useful if you want to change the plot settings (remove one of the axes, add small data points, change the curve, etc.). This will also allow you to change the project files on the board after running the sample application.
 
 #### Dynamic Host Configuration Protocol (DHCP)
