@@ -345,7 +345,7 @@ Keep in mind that the current setup will refresh the data approximately 10 times
 [//]: # (Do we/can we calibrate this thing?)
 
 ![Sample data](images/adxl345-fast30.gif)
-![Accelerometer Axes](images/45degree-axes.jpg)
+![Accelerometer Axes](images/45degree-axes-800x535.jpg)
 
 ### Static Forces
 **Force of Gravity**
@@ -359,9 +359,9 @@ The green line (z-axis) should show a constant force of 1g (or 9.8 m/s^2). And, 
 **Movement**
 
 Observe motion along the x (blue), y (orange) and z(green) axes by moving the board:
-* Up and down
-* Side to side
-* At a 45 degree angle
+* Up and down and side to side
+* Figure eight
+* Seesaw motion
 
 **Vibration**
 
