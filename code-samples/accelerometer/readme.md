@@ -60,8 +60,8 @@ Node.js\*
 How does your smart phone know which way is up? And how does it know to change its orientation from portrait to landscape when you rotate your device by 90 degrees clockwise? These motion smart features come courtesy of an accelerometer. An accelerometer is a sensor that measures acceleration (relative to its own frame of reference). You may remember from physics what when velocity—speed with direction—is changing, acceleration is happening. Acceleration includes speeding up, slowing down or changing direction and by measuring acceleration (g-force) along the x, y, and z axes an accelerometer knows up from down.
 
 There are two ways to use an accelerometer: 
-1. acceleration
-2. tilt
+1. Acceleration
+2. Tilt
 
 Here we use a 3-axis accelerometer to measure acceleration along all 3 axes (x, y, and z).
 
@@ -360,8 +360,8 @@ The green line (z-axis) should show a constant force of 1g (or 9.8 m/s^2). And, 
 
 Observe motion along the x (blue), y (orange) and z (green) axes by moving the board:
 * Up and down and side to side
+* At a 45 degree angle
 * Figure eight
-* Seesaw motion
 
 **Vibration**
 
