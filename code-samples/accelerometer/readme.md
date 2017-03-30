@@ -3,7 +3,7 @@
 [//]: # (This syntax works like a comment, and won't appear in any output.)
 
 ## Purpose and Overview
-Data from the DE10-Nano's built-in 3-axis accelerometer is measured on ALL 3 axes to show when the board is in motion. The raw output of the accelerometer is converted to g-force values by a sensor library and then sent to graphing software for data visualization and interpretation.
+Data from the Terasic DE10-Nano's\* built-in 3-axis accelerometer is measured on ALL 3 axes to show when the board is in motion. The raw output of the accelerometer is converted to g-force values by a sensor library and then sent to graphing software for data visualization and interpretation.
 
 [//]: # (Remove learn how to use opkg item okay?)
 
@@ -12,25 +12,25 @@ In this tutorial you will:
 * Interface with the board's built-in digital accelerometer using an I2C\* interface.
 * Use Intel’s I/O and sensor libraries (MRAA and UPM) to get data from the accelerometer.
 * Monitor and observe acceleration data for small vibration and movement along the x, y, z axes.
-* Translate the acceleration data into +/- g-force values to demonstrate the motion of the DE10-Nano board.
+* Translate the acceleration data into +/- g-force values to demonstrate the motion of the Terasic DE10-Nano\* board.
 * Show the accelerometer data using different open-source technologies: 
   * Express\* (web server)
   * Plotly\* (graphing library)
-  * Websockets\*(data stream).
+  * Websockets\* (data stream).
 
-**Note**: Both Express.js and Plotly.js are non-restrictive MIT licensed technologies.
+**Note**: Both Express.js and Plotly.js are non-restrictive MIT\* licensed technologies.
 
 ## Materials
 
 ### Hardware
-* [Terasic DE10-Nano Development Board](https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&CategoryNo=205&No=1046&PartNo=8)
+* [Terasic DE10-Nano kit](https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&CategoryNo=205&No=1046&PartNo=8)
 * Ethernet cable
 * Router
 
 ### Software
 
-* [PuTTY](www.putty.org/)
-* [Tera Term](https://ttssh2.osdn.jp/index.html.en)
+* [PuTTY\*](www.putty.org/)
+* [Tera Term\*](https://ttssh2.osdn.jp/index.html.en)
 
 To connect to the board via serial/SSH you will need a client like Putty or TeraTerm.
 
@@ -47,7 +47,7 @@ MRAA is an I/O library (abstraction layer) that creates a common interface acros
 
 * UPM
 
-UPM is a sensor library that provides software drivers for a wide variety of commonly used sensors including the DE10-nano's on-board accelerometer. These software drivers interact with the underlying hardware platform through calls to MRAA APIs. In this tutorial, the UPM library is used to read data from the board's built-in 3-axis digital accelerometer, the ADXL345 from Analog Devices.
+UPM is a sensor library that provides software drivers for a wide variety of commonly used sensors including the DE10-nano's on-board accelerometer. These software drivers interact with the underlying hardware platform through calls to MRAA APIs. In this tutorial, the UPM library is used to read data from the board's built-in 3-axis digital accelerometer, the ADXL345 from Analog Devices\*.
 
 **Note**: MRAA and UPM come pre-installed on the default DE10-Nano microSD card image.
 
@@ -59,9 +59,13 @@ Node.js\*
 ### Speeding Up, Slowing Down, Changing Direction
 How does your smart phone know which way is up? And how does it know to change its orientation from portrait to landscape when you rotate your device by 90 degrees clockwise? These motion smart features come courtesy of an accelerometer. An accelerometer is a sensor that measures acceleration (relative to its own frame of reference). You may remember from physics what when velocity—speed with direction—is changing, acceleration is happening. Acceleration includes speeding up, slowing down or changing direction and by measuring acceleration (g-force) along the x, y, and z axes an accelerometer knows up from down.
 
-There are two ways to use an accelerometer: acceleration and tilt. Here we use a 3-axis accelerometer to measure acceleration along all 3 axes (x, y, and z).
+There are two ways to use an accelerometer: 
+1. acceleration
+2. tilt
 
-**note**: The acceleration due to gravity at the Earth's surface is one g.
+Here we use a 3-axis accelerometer to measure acceleration along all 3 axes (x, y, and z).
+
+**Note**: Recall that the acceleration due to gravity at the Earth's surface is one g.
 
 ### Communicating with the Accelerometer
 
@@ -93,7 +97,7 @@ Follow along with the steps below to get data from the DE10-Nano's built-in acce
 ## Step 1: Prepare your DE10-Nano
 
 #### Checkpoint: Have you gone through the initial assembly and setup of the DE10-Nano board?
-At this point, we assume you've already gone through the initial assembly and setup for the DE10-Nano kit. The microSD card that came with the Terasic\* DE10-Nano kit should be inserted into the board's microSD card slot and your board should be powered on. Go through the assembly and setup process first!
+At this point, we assume you've already gone through the initial assembly and setup for the DE10-Nano kit. The microSD card that came with the Terasic\* DE10-Nano kit should be inserted into the board's microSD card slot and your board should be powered on. Please go through the assembly and setup process first!
 
 For instructions on board assembly and setup, check out the [DE10-Nano Setup](https://software.intel.com/en-us/de10-nano-setup) from the DE10-Nano Get Started Guide.
 
@@ -101,17 +105,11 @@ For instructions on board assembly and setup, check out the [DE10-Nano Setup](ht
 
 First connect the DE10-Nano board to the internet and get a static IP.
 
-**Note**: Newer versions of the DE10-Nano image will contain drivers for most USB Wi-Fi dongles. Unfortunately this exercise does not cover setting up a wireless connection.
-
-[//]: # (Reason we need to connect to the internet is to do opkg.)
-
-[//]: # (Most importantly to do a git clone on the source code for this tutorial.)
-
 1. Run an Ethernet cable from the DE10-Nano board to a router.
 
-**Note**: There are two different network interfaces on the DE10-Nano board: 1) Ethernet interface (ETH0) and 2) USB RNDIS (Ethernet over USB, interface USB0). In this exercise we use the Ethernet interface.
+There are two different network interfaces on the DE10-Nano board: 1) Ethernet interface (ETH0) and 2) USB RNDIS (Ethernet over USB, interface USB0). In this exercise we use the Ethernet interface.
 
-[//]: # (point user to page in IDZ book to avoid duplication of instructions)
+**Note**: Newer versions of the DE10-Nano image will contain drivers for most USB Wi-Fi dongles. Unfortunately this exercise does not cover setting up a wireless connection.
 
 #### Get a static IP
 
@@ -123,7 +121,7 @@ This tutorial assumes that you'll use a serial connection to the board to perfor
 
 ##### Start Your Terminal Application
 
-Start your preferred terminal application to establish a connection to the DE10-nano.
+Start your preferred terminal application (PuTTY or Tera Term) to establish a connection to the DE10-nano board.
 
 Run the following command to force a static IP on the eth0 interface with connman:
 
