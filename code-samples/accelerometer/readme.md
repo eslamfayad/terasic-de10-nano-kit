@@ -16,7 +16,7 @@ In this tutorial you will:
 * Show the accelerometer data using different open-source technologies: 
   * Express\* (web server)
   * Plotly\* (graphing library)
-  * Websockets\* (data stream).
+  * Websocket\* (data stream).
 
 **Note**: Both Express.js and Plotly.js are non-restrictive MIT\* licensed technologies.
 
@@ -147,7 +147,7 @@ If you need to revert the changes made to the ETH0 interface and return to using
 
 ## Step 2: Clone the GitHub Repository
 
-[//]: # (Express, Websockets, and Plotly are not on the microSD card but they get pulled in when you run npm install)
+[//]: # (Express, Websocket, and Plotly are not on the microSD card but they get pulled in when you run npm install)
 
 [//]: # (Plotly graph viewed on the host PC or your laptop)
 
@@ -179,7 +179,7 @@ npm install
 
 ## Step 4: Unbind the ADXL345\* Driver
 
-By default Linux\* is bound (i.e., "owns") this accelerometer device. Here, we'll need to "unbind" the device from Linux in order to use it for our program. Wrestle that control away from Linux.
+By default Linux\* is bound (i.e., "owns") this accelerometer device. Here, we'll need to "unbind" the device from Linux (you know, take that control away from Linux) in order to use it for our program. 
 
 By default the adxl34x driver will bind with device 0-0053, you can see that in the directory listing below:
 
@@ -231,7 +231,7 @@ Driver changes are not persistent after a reboot.
 
 ## Step 5: Setup an Express.js Webserver
 
-This webserver uses WebSockets\* to push live data captured from the accelerometer to the client's browser.
+This webserver uses WebSocket to push live data captured from the accelerometer to the client's browser.
 
 ### Set the Node.js module lookup path
 
@@ -249,7 +249,7 @@ echo "export NODE_PATH=/usr/lib/node_modules" > ~/.profile
 
 ### Start the Web server
 
-Server side code is in the `app.js` file. This file was generated using an Express.js template and then extended to handle a WebSockets connection. More information on both
+Server side code is in the `app.js` file. This file was generated using an Express.js template and then extended to handle a WebSocket connection. More information on both
 concepts can be found under references. The server will also send accelerometer data periodically using the UPM ADXL345 library, as explained in the next section.
 
 Client side code can be found in the `public/js/index.js` file. On the client side, you will need to set the IP address of the Terasic DE10-Nano board:
@@ -374,7 +374,7 @@ Observe what happens when you:
 
 On a PC or laptop, Plotly makes use of hardware acceleration (via webGL) for rendering the charts. Therefore you can work with large datasets, redraw often, and still be able to show responsive
 graphs. Unfortunately, this feature is unavailable on mobile browsers (e.g. tablets, smartphones). This means the plotting rate is directly impacted and limited to only a few updates per second
-(1 to 4) for these devices. The good news is that the amount of data you can send over WebSockets is not affected.
+(1 to 4) for these devices. The good news is that the amount of data you can send over WebSocket is not affected.
 
 A natural optimization would be to collect the data points in buffers on the client side, while continuing to send them at a high rate from the Terasic DE10-Nano. You can then update the graph with
 several values at once and still keep the graph responsive even on mobile devices.
