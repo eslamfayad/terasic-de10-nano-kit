@@ -145,7 +145,7 @@ If you need to revert the changes made to the ETH0 interface and return to using
 `connmanctl config ethernet_000000000000_cable --ipv4 dhcp`
 
 
-## Step 2: Clone the GitHub/* Repository
+## Step 2: Clone the GitHub Repository
 
 [//]: # (Express, Websockets, and Plotly are not on the microSD card but they get pulled in when you run npm install)
 
@@ -161,7 +161,7 @@ git clone https://github.com/intel-iot-devkit/terasic-de10-nano-kit.git
 This will create a new folder named `terasic-de10-nano-kit` in the current directory.
 The source code files for the accelerometer tutorial can be found under `terasic-de10-nano-kit/code-samples/accelerometer/de10-adxl345`.
 
-## Step 3: Install Express\*, Websocket\* and Plotly\*
+## Step 3: Install Express, Websocket and Plotly
 
 Enter the application directory by typing:
 
