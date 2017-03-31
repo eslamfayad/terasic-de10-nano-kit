@@ -179,7 +179,7 @@ npm install
 
 ## Step 4: Unbind the ADXL345\* Driver
 
-By default Linux/* is bound (i.e., "owns") this accelerometer device. Here, we'll need to "unbind" the device from Linux in order to use it for our program. Wrestle that control away from Linux.
+By default Linux\* is bound (i.e., "owns") this accelerometer device. Here, we'll need to "unbind" the device from Linux in order to use it for our program. Wrestle that control away from Linux.
 
 By default the adxl34x driver will bind with device 0-0053, you can see that in the directory listing below:
 
