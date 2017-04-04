@@ -1,19 +1,14 @@
 # Capture and Plot Accelerometer Data
 
-[//]: # (This syntax works like a comment, and won't appear in any output.)
-
 ## Purpose and Overview
 Data from the Terasic DE10-Nano's built-in 3-axis accelerometer is measured on ALL 3 axes to show when the board is in motion. The raw output of the accelerometer is converted to g-force values by a sensor library and then sent to graphing software for data visualization and interpretation.
-
-[//]: # (Remove learn how to use opkg item okay?)
-
 
 In this tutorial you will:
 * Interface with the board's built-in digital accelerometer using an I2C interface.
 * Use Intel® I/O and sensor libraries (MRAA and UPM) to get data from the accelerometer.
 * Monitor and observe acceleration data for small vibration and movement along the x, y, z axes.
 * Translate the acceleration data into +/- g-force values to demonstrate the motion of the Terasic DE10-Nano board.
-* Show the accelerometer data using different open-source technologies: 
+* Show the accelerometer data using different open-source technologies:
   * Express\* (web server)
   * Plotly\* (graphing library)
   * Websocket\* (data stream).
@@ -34,12 +29,7 @@ In this tutorial you will:
 
 To connect to the board via serial/SSH you will need a client like Putty or TeraTerm.
 
-[//]: # (For getting a tilt/orientation vector you would need to do a bit of trigonometry on the accelerometer data and that is not shown here.)
-
-[//]: # (This syntax works like a comment, and won't appear in any output.)
-
 #### Libraries
-[//]: # (Dalon helped to build out the below descriptions.)
 
 * MRAA
 
@@ -59,7 +49,7 @@ Node.js\*
 ### Speeding Up, Slowing Down, Changing Direction
 How does your smart phone know which way is up? And how does it know to change its orientation from portrait to landscape when you rotate your device by 90 degrees clockwise? These motion smart features come courtesy of an accelerometer. An accelerometer is a sensor that measures acceleration (relative to its own frame of reference). You may remember from physics what when velocity—speed with direction—is changing, acceleration is happening. Acceleration includes speeding up, slowing down or changing direction and by measuring acceleration (g-force) along the x, y, and z axes an accelerometer knows up from down.
 
-There are two ways to use an accelerometer: 
+There are two ways to use an accelerometer:
 1. Acceleration
 2. Tilt
 
@@ -69,16 +59,12 @@ Here we use a 3-axis accelerometer to measure acceleration along all 3 axes (x, 
 
 ### Communicating with the Accelerometer
 
-Here, we interface with the board's built-in digital accelerometer using an I2C interface. The I2C bus is physically wired up to the ARM\* processor on the SoC. 
+Here, we interface with the board's built-in digital accelerometer using an I2C interface. The I2C bus is physically wired up to the ARM\* processor on the SoC.
 
 ## Tutorial Steps
 Follow along with the steps below to get data from the Terasic DE10-Nano's built-in accelerometer and plot that data in graphing software.
 
 1. [Prepare the Terasic DE10-Nano development board to host the accelerometer application](readme.md#step-1-prepare-your-de10-nano)
-
-[//]: # (2. Build and install the MRAA and UPM libraries on the Terasic de10-nano board removed -- Dalon plans to release new versions semi-annually)
-
-[//]: # (java bindings are not enabled for the pre-installed packages. And the reason, the version of Angstrom we are using... the java packages don't compile)
 
 2. [Clone the GitHub\* repository](readme.md#step-2-clone-the-github-repository)
 
@@ -86,13 +72,11 @@ Follow along with the steps below to get data from the Terasic DE10-Nano's built
 
 4. [Unbind the ADXL345\* Driver](readme.md#step-4-unbind-the-adxl345-driver)
 
-5. [Setup an Express.js Web server](readme.md#step-5-setup-an-expressjs-webserver) 
+5. [Setup an Express.js Web server](readme.md#step-5-setup-an-expressjs-webserver)
 
 6. [Generate a real-time plot using Plotly\*](readme.md#step-6-generate-a-real-time-plot-using-plotly)
 
 7. [Observe the types of forces acting on the board](readme.md#step-7-observe-the-types-of-forces-acting-on-the-board)
-
-[//]: # (Dalon installed node.js and npm on the microSD card)
 
 ## Step 1: Prepare your Terasic DE10-Nano
 
@@ -103,53 +87,62 @@ At this point, we assume you've already gone through the initial assembly and se
 For instructions on board assembly and setup, check out the [Terasic DE10-Nano Setup](https://software.intel.com/en-us/de10-nano-setup) from the Terasic DE10-Nano Get Started Guide.
 
 ### Connect to the Board
-This tutorial assumes that you'll use a serial connection to the board to perform the initial setup. You should also set a password for the root account, by running the `passwd` command.
+For this tutorial you'll use a serial connection to the board to perform the initial setup.
+
+**Note**: We assume you know how to set up a serial terminal on a system. For a reference on how to set up a serial terminal, check out the page [here](https://software.intel.com/en-us/setting-up-serial-terminal-intel-edison-board).
 
 Here, you'll connect the board to the internet, get a static IP and then switch over to an SSH connection.
 
 1. Run an Ethernet cable from the Terasic DE10-Nano board to a router.
 
-There are two different network interfaces on the Terasic DE10-Nano board: 1) Ethernet interface (ETH0) and 2) USB RNDIS (Ethernet over USB, interface USB0). In this exercise we use the Ethernet interface.
+    There are two different network interfaces on the Terasic DE10-Nano board:
+        1) Ethernet RJ45 as `eth0`
+        2) Ethernet over USB (RNDIS) as `usb0`
 
-**Note**: Newer versions of the Terasic DE10-Nano image will contain drivers for most USB Wi-Fi dongles. Unfortunately this exercise does not cover setting up a wireless connection.
+    In this exercise we use the `eth0` interface.
+
+    **Note**: Newer versions of the Terasic DE10-Nano image will contain drivers for most USB Wi-Fi dongles. Unfortunately this exercise does not cover setting up a wireless connection.
 
 2. Get a static IP
 
-Start your preferred terminal application (PuTTY or Tera Term) to establish a connection to the Terasic DE10-nano board.
+    Start your preferred terminal application (PuTTY or Tera Term) to establish a serial connection to the Terasic DE10-nano board. Once connected, you should set a password for the root account,
+    by running the `passwd` command.
 
-Run the following command to force a static IP on the eth0 interface with connman:
+    Most modern routers are able to assign a static IP even with DHCP assignment turned on, based on the MAC address of the Ethernet interface. Consult your router's manual for information on how to do this.
 
-`connmanctl config ethernet_000000000000_cable --ipv4 manual <device_ip> <subnet_mask> <gateway_ip>`
- 
-| Variable | Description | Example |
-| --- | --- | --- |
-| <device_ip> | the IP address you want to assign to the Terasic DE10-Nano | 192.168.1.10 |
-| <subnet_mask> | bit mask to determine what subnet the IP address belongs to | 255.255.255.0 |
-| <gateway_ip> | gateway/router IP address | 192.168.1.1 |
+    If your router doesn't support assigning a static IP for a DHCP client, you can run the following commands to force a static IP on the `eth0` interface with connman:
 
-**Note**: We assume you know how to set up a serial terminal on a system. For a reference on how to set up a serial terminal, check out the page [here](https://software.intel.com/en-us/setting-up-serial-terminal-intel-edison-board).
+    ```
+    connmanctl config ethernet_000000000000_cable --ipv4 manual <device_ip> <subnet_mask> <gateway_ip>
+    connmanctl config ethernet_000000000000_cable --nameservers <gateway_ip>
+    ```
+
+    | Variable | Description | Example |
+    | --- | --- | --- |
+    | <device_ip> | the IP address you want to assign to the Terasic DE10-Nano | 192.168.1.10 |
+    | <subnet_mask> | bit mask to determine what subnet the IP address belongs to | 255.255.255.0 |
+    | <gateway_ip> | gateway/router IP address | 192.168.1.1 |
+
+    Please **disconnect the USB cable** once you complete this step and have the IP address of the board. Using both interfaces at the same time may cause them to interfere.
 
 3. Switch to a Remote SSH connection
 
-Now that you have a static IP, we can switch over to an SSH connection. Using an SSH connection will be faster, more secure and allows for file transfer to and from the board. This will be useful if you want to change the plot settings (remove one of the axes, add small data points, change the curve, etc.). This will also allow you to change the project files on the board after running the sample application.
+    Now that you have a static IP, we can switch over to an SSH connection. When you disconnect the USB cable the terminal application will close the previous connection.
+    Start a new terminal instance and use the IP address of the board instead.
+
+    Using an SSH connection will be faster, more secure and allows for file transfer to and from the board. This will prove useful if you want to change the plot settings (e.g. remove one of the axes,
+    add data point markers, change the curve smoothness, etc.). This will also allow you to change the project files on the board after running the sample application.
 
 #### Dynamic Host Configuration Protocol (DHCP)
 By default, the Ethernet interface on the board is set to Dynamic Host Configuration Protocol (DHCP) mode, thus it will automatically ask for an IP address from the router that the board was plugged into.
-
-The process of connecting to the Terasic DE10-Nano and hosting the graphing webpage is made a lot easier by configuring the router to assign a static IP to the board (based on the MAC address of the Ethernet interface).
-
-Most modern routers are able to do this even with DHCP assignment turned on. By setting a static IP you won't have to edit the client configuration every time you are assigned a new IP address by the router.
+The process of connecting to the Terasic DE10-Nano and hosting the graphing webpage is made a lot easier by setting a static IP. This basically means you won't have to edit the client configuration every
+time you are assigned a new IP address by the router.
 
 ##### Return to DHCP mode (optional)
-If you need to revert the changes made to the ETH0 interface and return to using DHCP mode, type the command:
+If you need to revert the changes made to the `eth0` interface and return to using DHCP mode, type the command:
 `connmanctl config ethernet_000000000000_cable --ipv4 dhcp`
 
-
 ## Step 2: Clone the GitHub Repository
-
-[//]: # (Express, Websocket, and Plotly are not on the microSD card but they get pulled in when you run npm install)
-
-[//]: # (Plotly graph viewed on the host PC or your laptop)
 
 Cloning the Github repository which includes the source code for this sample is a straightforward process. The Git client is part of the Terasic DE10-Nano image.
 To clone the repository type the following command in your SSH session:
@@ -175,17 +168,15 @@ When using the sample code from this repository, Express, Websocket and Plotly w
 npm install
 ```
 
-[//]: # (Make a note that these packages come pre-installed on the default sd card image but... you can okpg technologies into your development enviroment. You can learn how to use opkg here!)
-
 ## Step 4: Unbind the ADXL345\* Driver
 
-By default Linux\* is bound (i.e., "owns") this accelerometer device. Here, we'll need to "unbind" the device from Linux (you know, take that control away from Linux) in order to use it for our program. 
+By default Linux\* is bound (i.e., "owns") this accelerometer device. Here, we'll need to "unbind" the device from Linux (you know, take that control away from Linux) in order to use it for our program.
 
 By default the adxl34x driver will bind with device 0-0053, you can see that in the directory listing below:
 
 ```
 root@de10-nano:~# ls /sys/bus/i2c/drivers/adxl34x
-0-0053  bind    uevent  unbind 
+0-0053  bind    uevent  unbind
 ```
 
 The adx34x kernel driver polls the accelerometer continuously and it will interfere with the MRAA library. Furthermore, it enables
@@ -208,22 +199,22 @@ root@de10-nano:~# echo 0-0053 > /sys/bus/i2c/drivers/adxl34x/unbind
 Notice that the device is no longer present in this directory:
 
 ```
-root@de10-nano:~# ls /sys/bus/i2c/drivers/adxl34x                    
-bind    uevent  unbind 
+root@de10-nano:~# ls /sys/bus/i2c/drivers/adxl34x
+bind    uevent  unbind
 ```
 
 To bind the device you echo the device name to the bind pseudo file in sysfs like this:
 
 ```
-root@de10-nano:~# echo 0-0053 > /sys/bus/i2c/drivers/adxl34x/bind    
+root@de10-nano:~# echo 0-0053 > /sys/bus/i2c/drivers/adxl34x/bind
 [  871.268013] input: ADXL34x accelerometer as /devices/platform/soc/ffc04000.i2c/i2c-0/0-0053/input/input5
 ```
 
 Notice that the device is back:
 
 ```
-root@de10-nano:~# ls /sys/bus/i2c/drivers/adxl34x                 
-0-0053  bind    uevent  unbind 
+root@de10-nano:~# ls /sys/bus/i2c/drivers/adxl34x
+0-0053  bind    uevent  unbind
 ```
 
 **Note**: Rebinding the driver is required in case you want to run other accelerometer samples. (Hint: There maybe an accelerometer Easter egg hiding on the microSD card image... Go hunt for it!).
@@ -258,9 +249,7 @@ Client side code can be found in the `public/js/index.js` file. On the client si
 var connection = new WebSocket('ws://192.168.1.10:3001'); // Change to match your own DE10-Nano IP
 ```
 
-You can use the built in `vi` editor to make the change. You are now ready to start the server.
-
-[//]: # (note that there is another editor in the event that you hate/disklike vi. Dalon knows that other editor option. Ask him. It's a GUI based editor that can be used.)
+You can use the built-in `vi` editor to make the change. Other text editors are available from the official Angstrom repository (e.g. vim, nano). You are now ready to start the server.
 
 Starting Express\* is as simple as typing the following command:
 
@@ -339,16 +328,13 @@ Keep in mind that the current setup will refresh the data approximately 10 times
 
 ## Step 7: Observe the Types of Forces Acting on the Board
 
-[//]: # (Tudor to add board + axes overlay -- give Tudor spcm graphics folder URL)
-[//]: # (Do we/can we calibrate this thing?)
-
 ![Sample data](images/adxl345-fast30.gif)
 ![Accelerometer Axes](images/45degree-axes-800x535.jpg)
 
 ### Static Forces
 **Force of Gravity**
 
-You can observe the force of gravity acting on the board when board is resting on its rubber feet. 
+You can observe the force of gravity acting on the board when board is resting on its rubber feet.
 
 The green line (z-axis) should show a constant force of 1g (or 9.8 m/s^2). And, in fact, the force of gravity is always shown on the graph!
 
@@ -363,7 +349,6 @@ Observe motion along the x (blue), y (orange) and z (green) axes by moving the b
 
 **Vibration**
 
-[//]: # (Future item. Bob's idea is to have something vibrate the board -- a constant vibration preferred -- and then feed into the FFT and it converts that time domain into frequency. Pure software project. No hardware.)
 Observe what happens when you:
 
 * Lightly tap the board
@@ -387,7 +372,6 @@ including several rated for industrial use are also available. For a full list o
 ## References
  * MRAA: http://mraa.io
  * UPM: http://upm.mraa.io
- * OPKG: https://wiki.openwrt.org/doc/techref/opkg
  * Express.js: https://expressjs.com/
  * Websocket.js: https://github.com/theturtle32/WebSocket-Node
  * Plotly.js: https://plot.ly/javascript/
@@ -395,10 +379,9 @@ including several rated for industrial use are also available. For a full list o
 Some nice Plotly examples on how to extend graphs with new data:
  * http://codepen.io/plotly/pen/LGEyyY
  * http://codepen.io/etpinard/pen/qZzyXp
- 
- ## Additional Resources
+
+## Additional Resources
 * [Discover the Terasic DE10-Nano Kit](https://signin.intel.com/logout?target=https://software.intel.com/en-us/iot/hardware/fpga/de10-nano)
 * [Terasic DE10-Nano Get Started Guide](https://software.intel.com/en-us/terasic-de10-nano-get-started-guide)
 * [Project: My First FPGA](https://software.intel.com/en-us/articles/my-first-fpga)
 * [Learn more about Intel® FPGAs](https://software.intel.com/en-us/iot/hardware/fpga/)
-
