@@ -47,15 +47,15 @@ Node.js\*
 ## Accelerometer Theory
 
 ### Speeding Up, Slowing Down, Changing Direction
-How does your smart phone know which way is up? And how does it know to change its orientation from portrait to landscape when you rotate your device by 90 degrees clockwise? These motion smart features come courtesy of an accelerometer. An accelerometer is a sensor that measures acceleration (relative to its own frame of reference). You may remember from physics what when velocity—speed with direction—is changing, acceleration is happening. Acceleration includes speeding up, slowing down or changing direction and by measuring acceleration (g-force) along the x, y, and z axes an accelerometer knows up from down.
+How does your smart phone know which way is up? And how does it know to change its orientation from portrait to landscape when you rotate your device by 90 degrees clockwise? These motion smart features come courtesy of an accelerometer. An accelerometer is a sensor that measures acceleration (relative to its own frame of reference). You may remember from physics that when velocity—speed with direction—is changing, acceleration is happening. Acceleration includes speeding up, slowing down or changing direction and by measuring acceleration (g-force) along the x, y, and z axes an accelerometer knows its orientation in space.
 
-There are two ways to use an accelerometer:
+There are two main ways to use the accelerometer:
 1. Acceleration
 2. Tilt
 
 Here we use a 3-axis accelerometer to measure acceleration along all 3 axes (x, y, and z).
 
-**Note**: Recall that the acceleration due to gravity at the Earth's surface is one g.
+**Note**: Recall that the acceleration due to gravity at the Earth's surface is equal to 1g.
 
 ### Communicating with the Accelerometer
 
@@ -64,7 +64,7 @@ Here, we interface with the board's built-in digital accelerometer using an I2C 
 ## Tutorial Steps
 Follow along with the steps below to get data from the Terasic DE10-Nano's built-in accelerometer and plot that data in graphing software.
 
-1. [Prepare the Terasic DE10-Nano development board to host the accelerometer application](readme.md#step-1-prepare-your-de10-nano)
+1. [Prepare the Terasic DE10-Nano development board to host the accelerometer application](readme.md#step-1-prepare-your-terasic-de10-nano)
 
 2. [Clone the GitHub\* repository](readme.md#step-2-clone-the-github-repository)
 
@@ -89,7 +89,7 @@ For instructions on board assembly and setup, check out the [Terasic DE10-Nano S
 ### Connect to the Board
 For this tutorial you'll use a serial connection to the board to perform the initial setup.
 
-**Note**: We assume you know how to set up a serial terminal on a system. For a reference on how to set up a serial terminal, check out the page [here](https://software.intel.com/en-us/setting-up-serial-terminal-intel-edison-board).
+**Note**: We assume you know how to set up a serial terminal on a system. For a reference on how to set up a serial terminal, check out [How to Set Up a Serial Terminal](https://software.intel.com/en-us/node/731116).
 
 Here, you'll connect the board to the internet, get a static IP and then switch over to an SSH connection.
 
