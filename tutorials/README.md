@@ -57,5 +57,5 @@ Intel and Quartus are trademarks of Intel Corporation or its subsidiaries in the
 
 Other names and brands may be claimed as the property of others.
 
-[latest-release-download-page]:https://github.intel.com/rfrazer/de10-nano-tutorials/releases/latest
+[latest-release-download-page]:https://github.com/intel-iot-devkit/terasic-de10-nano-kit/releases/latest
 
