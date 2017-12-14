@@ -63,16 +63,16 @@ echo "diff between real image list and image license list (should be none):"
 diff "${IMAGE_LICENSE_FILES:?}" "${REAL_IMAGE_FILES:?}"
 echo ""
 
-# filter out all image and readme files
+# filter out all image, readme and howto files
 grep \
 	-v \
 	-e ".png" -e ".fodg" \
-	-e "README" "${GIT_FILES_FILE:?}" \
+	-e "README" -e "HOWTO" "${GIT_FILES_FILE:?}" \
 	> "${GIT_TEXT_FILES_FILE:?}"
 
-# filter out readme files
+# filter out readme and howto files
 grep \
-	-e "README" "${GIT_FILES_FILE:?}" \
+	-e "README" -e "HOWTO" "${GIT_FILES_FILE:?}" \
 	> "${GIT_README_FILES_FILE:?}"
 
 # search text files for Intel copyright statement
