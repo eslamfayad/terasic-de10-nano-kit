@@ -485,7 +485,6 @@ static void *do_ebanner_crawler_thread(void *arg) {
 	uint32_t start_x;
 	uint32_t start_y;
 	uint32_t first_crawl_pixel;
-	const char *crawl_format_str;
 	char crawl_str[1024];
 	int snprintf_length;
 	uint32_t crawl_buffer_width;
@@ -498,16 +497,14 @@ static void *do_ebanner_crawler_thread(void *arg) {
 	(void)arg;
 
 	while(1) {
-		crawl_format_str =
-		"Explore the Mandelbrot fractal.  "
-		"Tip the DE10-Nano board to move the onscreen cursor using the accelerometer.  "
-		"Press the KEY1 push button to zoom in and out of the coordinate under the cursor.  "
-		"Hold KEY1 down to continue the zoom.  "
-		"Press the KEY0 push button to bring up the Explore menu. "
-		"See menu for usability advice.";
 
 		snprintf_length = snprintf(crawl_str, 1024,
-					crawl_format_str);
+			"Explore the Mandelbrot fractal.  "
+			"Tip the DE10-Nano board to move the onscreen cursor using the accelerometer.  "
+			"Press the KEY1 push button to zoom in and out of the coordinate under the cursor.  "
+			"Hold KEY1 down to continue the zoom.  "
+			"Press the KEY0 push button to bring up the Explore menu. "
+			"See menu for usability advice.");
 		assert(snprintf_length < 1024);
 
 		pixmap_buffer = (uint32_t *)(get_g_mandelbrot_fb_map());
