@@ -76,6 +76,5 @@ echo "Compiler Version:"
 
 strings ${MANDEL_SOF:?} | \
 	grep "Version" | \
-	fold -w 58 -s | \
 	sed -e 's/\(.*\)/    \1/'
 
