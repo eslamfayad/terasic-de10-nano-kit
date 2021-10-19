@@ -2,7 +2,7 @@
 # Copyright (C) 2021 Intel Corporation 
 # Licensed under the MIT license. See LICENSE file in the project root for
 # full license information.
-
+# Microsoft's Origin File is moved to LICENSES/iot-edge-samples from the project root.
 
 # Origin
 # Copyright (c) Microsoft. All rights reserved.
