@@ -2,6 +2,9 @@
 # Licensed under the MIT license. See LICENSE file in the project root for
 # full license information.
 
+import sys
+sys.path.append('../')
+
 import unittest
 from package.gsensor import *
 from package.basecomnios import *

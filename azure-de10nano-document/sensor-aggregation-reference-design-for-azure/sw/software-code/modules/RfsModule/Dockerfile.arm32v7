@@ -23,7 +23,9 @@ COPY ./main.py .
 #Overlay Files
 COPY ./overlay/Module5_Sample_HW.rbf .
 COPY ./overlay/rfs-overlay.dtbo .
+COPY ./overlay/overlay.sh .
 COPY ./overlay/run.sh .
+RUN chmod +x overlay.sh
 RUN chmod +x run.sh
 
 CMD [ "/app/run.sh"]
