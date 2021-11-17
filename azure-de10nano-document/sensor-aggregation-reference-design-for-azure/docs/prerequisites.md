@@ -9,7 +9,14 @@
 + Reference Documentations
     + [Quick Started][LINK_InnovateFPGA_Tutorial]  
     This documentation covers usage of Microsoft Azure Resource Manager for IoT device deployment.
-    
+    > [!WARNING]
+    > We have a report with some SD cards you may see SD card access error in console.  
+    > We are investigating this issue.
+    > In the meantime, please try with a bigger SD card (16GB or bigger).  We have only seen this error with some 8GB SD cards.
+    > If you experience this issue, please report to your Innovate FPGA contact.  
+    > Reference: <https://github.com/terasic/InnovateFPGA2021/blob/main/docs/PaaS-Provision.md>
+
+
     + [Build an Azure* Container-based Application using Visual Studio Code][LINK_Build_an_Azure_Container-based_Application_using_Visual_Studio_Code]  
     This tutorial covers the basic development of Azure IoT Edge Container-based application.
     
